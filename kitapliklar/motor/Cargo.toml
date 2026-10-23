@@ -1,0 +1,29 @@
+[package]
+name = "spcad-engine"
+description = "SPCAD engine: sessions, commands, the command line and prompts, snaps, selection, undo"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+spcad-geom = { workspace = true }
+spcad-color = { workspace = true }
+spcad-doc = { workspace = true }
+spcad-dxf = { workspace = true }
+spcad-constraints = { workspace = true }
+spcad-fonts = { workspace = true }
+spcad-render = { workspace = true }
+craft-docpath = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+log = { workspace = true }
+# R-tree spatial index for picking, window selection and object snaps (MIT OR Apache-2.0).
+rstar = { version = "0.12", default-features = false }
+
+[dev-dependencies]
+# Real DXF files for the external reference tests (io is a lower layer).
+spcad-io = { workspace = true }

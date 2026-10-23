@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=SP-GROUP CAD
+GenericName=Computer-Aided Design
+Comment=Draft, dimension and plot 2D drawings; open DXF and DWG files
+Exec=spcad %F
+TryExec=spcad
+Icon=com.spgroup.spcad
+Terminal=false
+StartupNotify=true
+StartupWMClass=com.spgroup.spcad
+Categories=Graphics;Engineering;VectorGraphics;
+MimeType=image/vnd.dxf;image/vnd.dwg;application/x-dxf;application/acad;
+Keywords=cad;drafting;dxf;dwg;drawing;engineering;architecture;mechanical;

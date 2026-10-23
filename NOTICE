@@ -1,0 +1,32 @@
+SP-GROUP CAD
+Copyright (c) 2026 SP-GROUP (this distribution and all modifications).
+Based on CADCraft (https://github.com/storytold/cadcraft).
+Copyright (c) 2026 ArtCraft Team and the CADCraft contributors.
+Licensed under the MIT License or the Apache License, Version 2.0, at your option
+(LICENSE-MIT, LICENSE-APACHE).
+
+This work builds upon the open-source CADCraft project (https://github.com/storytold/cadcraft),
+licensed under the MIT License, and has been rewritten by SP-GROUP.
+Original Code Copyright (c) 2026 ArtCraft Team and the CADCraft contributors.
+(Required notices are in this NOTICE.)
+
+This distribution is a modified version maintained by SP-GROUP. The ArtCraft name, wordmark and
+logos have been removed from it. The SP-GROUP name and the logo in
+varliklar/uygulama-simgesi/sp-group-cad.png are brand assets of SP-GROUP and are not covered by the license
+above.
+
+Third-party material
+
+Software dependencies are listed in Cargo.lock. One is under a weak-copyleft licence: the acadrust
+crate (DWG reading and writing, https://github.com/hakanaktt/acadrust) is licensed under the
+Mozilla Public License 2.0 and is used unmodified as a separate library (kitapliklar/dwg). Its source
+is available from crates.io and the repository above.
+
+
+None: every bundled asset is original to SPCAD (icons, drafting font, hatch patterns and
+linetypes are drawn or defined in code). The per-file list is in ATTRIBUTION.md. Builds made with
+the optional craft-fonts input (CRAFT_FONTS_DIR) embed the fonts listed in its ATTRIBUTION.md,
+each under the SIL Open Font License 1.1.
+
+SPCAD is an independent project and is not affiliated with, sponsored by or endorsed by
+Autodesk, Inc. AutoCAD and DWG are trademarks of Autodesk, Inc.

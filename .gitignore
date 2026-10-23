@@ -1,0 +1,86 @@
+# Ortam Değişkenleri
+.env
+.env.local
+.env.*.local
+
+# Rust Derleme Artıkları
+/target/
+**/*.rs.bk
+
+# Bağımlılıklar
+node_modules/
+vendor/
+
+# Python önbellekleri (paketleme/ikonlar.py)
+__pycache__/
+*.pyc
+
+# Web Uygulaması Derleme Çıktıları (uygulamalar/spcad-web WASM)
+# web/ dizini: Vite kaynağı ve derleme betikleri sürüme girer; yalnız
+# bağımlılıklar takip dışıdır, derleme çıktısı dist/ altındadır.
+uygulamalar/spcad-web/node_modules/
+uygulamalar/spcad-web/.vite/
+/uygulamalar/spcad-web/dist/
+
+# Yerel Plan ve Çalışma Notları (yalnız yerel, sürüme girmez)
+/plan/
+/plans/
+/temp/
+/dist/
+/log/
+
+# Sürüm Çıktıları (kök release/: yalnız son derleme, `cargo xtask release` üretir)
+/release/
+
+# IDE ve Ajan Dosyaları
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.claude/
+.gemini/
+.kilo/
+.superpowers/
+.zcode/
+.zcodeignore
+.ignore
+# Proje seviyesi ajan bellegi ve çalışma kaydı (yerel kalır, sürüme girmez)
+.workbuddy-ai/
+/AGENTS.md
+/CLAUDE.md
+
+# Tasarım akışı geliştirme artefaktları (yön kararı, inceleme ekran
+# görüntüleri, derleme durumu, mock'lar) — canlıya asla gitmez.
+.impeccable/
+.taste-skill/
+.superdesign/
+DESIGN.md
+PRODUCT.md
+
+# Ajan indeks / bağlam dosyaları (yerel üretilir, local kalır)
+.codegraph/
+/graft/
+.gitnexus/
+graphify-out/
+.graphify/
+.graphify*
+
+# Lisans ve Yasal Notlar (yerel çalışma notu, sürüme girmez)
+/licensing/
+
+# Log Dosyaları
+*.log
+error_log
+
+# PID ve Durdurma Bayrakları (çalışma zamanı üretir)
+*.pid
+
+# Yedek, Geçici ve Türetilmiş Dosyalar
+*.tmp
+*.bak
+*.zip
+
+# OS Dosyaları
+.DS_Store
+Thumbs.db
