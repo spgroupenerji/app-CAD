@@ -1,6 +1,6 @@
 //! Bakes the build stamp (`YYYYMMDDHHMM`, UTC+3) into the engine so every front end shows the same
-//! version: `MAJOR.MINOR.PATCH_vYYYYMMDDHHMM`. `SPCAD_BUILD_STAMP` overrides it and is taken as
-//! already being in UTC+3.
+//! version: `MAJOR.MINOR.PATCH_vYYYYMMDDHHMM`. `SPCAD_BUILD_STAMP` overrides it (with or without
+//! the leading `v`) and is taken as already being in UTC+3.
 
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -11,18 +11,23 @@ fn main() {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-env-changed=SPCAD_BUILD_STAMP");
     let stamp = match std::env::var("SPCAD_BUILD_STAMP") {
-        Ok(value) if is_stamp(&value) => value,
-        Ok(value) => {
-            println!("cargo:warning=SPCAD_BUILD_STAMP={value:?} is not YYYYMMDDHHMM; using the build time");
-            build_time_stamp()
-        }
+        Ok(value) => match stamp_digits(&value) {
+            Some(digits) => digits.to_string(),
+            None => {
+                println!("cargo:warning=SPCAD_BUILD_STAMP={value:?} is not [v]YYYYMMDDHHMM; using the build time");
+                build_time_stamp()
+            }
+        },
         Err(_) => build_time_stamp(),
     };
     println!("cargo:rustc-env=SPCAD_BUILD_STAMP={stamp}");
 }
 
-fn is_stamp(value: &str) -> bool {
-    value.len() == 12 && value.bytes().all(|b| b.is_ascii_digit())
+/// The twelve digits of `YYYYMMDDHHMM`; an optional leading `v` is accepted by the packaging
+/// scripts' `vYYYYMMDDHHMM` form and stripped, since the version string adds its own `v`.
+fn stamp_digits(value: &str) -> Option<&str> {
+    let digits = value.strip_prefix('v').unwrap_or(value);
+    (digits.len() == 12 && digits.bytes().all(|b| b.is_ascii_digit())).then_some(digits)
 }
 
 fn build_time_stamp() -> String {

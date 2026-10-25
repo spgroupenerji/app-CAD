@@ -11,6 +11,7 @@ belgesidir; bu dosya yalnızca SPCAD'e özgü kısımları kapsar.
   çekirdeği değiştirir. Uygulama görünen sürümü Hakkında penceresinde, `spcad --version`,
   `spcad-cli --version`, web hazır iletisi ve MCP `serverInfo` alanında gösterir; sürüm
   derlemeleri ayrıca commit'i gömer (`SPCAD_BUILD_SHA`).
+- **İndirilebilir beta:** `cargo xtask release` damgayı (`vYYYYMMDDHHMM`, Türkiye yerel saati) bir kez üretir; aynı damga `release/sp-group-cad_beta-<damga>.exe` adına ve `SPCAD_BUILD_STAMP` üzerinden Hakkında penceresine gider. Kök `release/` yalnız son derlemeyi tutar (eskiler silinir) ve indirilebilir olması için depoya işlenir.
 - **Sürüm çıkarma:** `main` üzerindeki sürümü artırın, sonra `main` dalını `release` dalına
   gönderin (`git push origin main:release`). `release` dalına yapılan her push
   `.github/workflows/release.yml` iş akışını çalıştırır ve `SPCAD v<version>` taslak GitHub

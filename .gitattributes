@@ -26,6 +26,7 @@
 *.ico binary
 *.icns binary
 *.tiff binary
+*.exe binary
 
 # Çizim veri dosyası: bayt bayt korunur, satır sonu dönüşümü yapılmaz
 # (örnekler/apartment.dxf depoda CRLF olarak saklanıyor, dönüştürmek

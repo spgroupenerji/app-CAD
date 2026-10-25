@@ -49,7 +49,9 @@
 
 ## Hazır Uygulama
 
-Paketleme betikleri `dist/release/` altında platforma özgü çıktılar üretir; depoda derlenmiş ikili tutulmaz.
+Windows için son beta derlemesi deponun kökündeki [`release/`](release/) dizininde tutulur ve doğrudan indirilebilir: `release/sp-group-cad_beta-vYYYYMMDDHHMM.exe`. `cargo xtask release` bu dosyayı üretir, eskisini siler ve damgayı bir kez üretip hem dosya adına hem Hakkında penceresindeki `BETA_vYYYYMMDDHHMM` etiketine verir.
+
+Paketleme betikleri `dist/release/` altında platforma özgü yükleyici ve paketleri üretir.
 
 | Platform | Çıktı | Not |
 |---|---|---|
@@ -151,7 +153,7 @@ Programatik çağrılar iletişim kutusu açmaz; yalnızca menü/toolbar etkile�
 
 ## Sürümlandırma
 
-Sürüm iki parçadan oluşur: kök `Cargo.toml` içindeki `[workspace.package] version` semver çekirdeği (`MAJOR.MINOR.PATCH`) ve derleme anındaki UTC zaman damgası. Kullanıcıya gösterilen sürüm:
+Sürüm iki parçadan oluşur: kök `Cargo.toml` içindeki `[workspace.package] version` semver çekirdeği (`MAJOR.MINOR.PATCH`) ve derleme anındaki yerel (Türkiye, UTC+3) zaman damgası. Kullanıcıya gösterilen sürüm:
 
 ```text
 MAJOR.MINOR.PATCH_vYYYYMMDDHHMM
@@ -164,13 +166,13 @@ cargo xtask version              # semver çekirdeğini yazdırır
 cargo xtask version set 0.11.0   # çalışma alanı sürümünü günceller
 ```
 
-Damga derleme anında UTC olarak üretilir; `SPCAD_BUILD_STAMP=YYYYMMDDHHMM` ile sabitlenebilir. Derleme kimliği `SPCAD_BUILD_SHA` ortam değişkeninden gelir; paketleme betikleri bunu git başlığından üretir. `spcad --version` çıktısı sürüm ve derleme kimliğini birlikte gösterir:
+Damga derleme anında Türkiye yerel saatine (UTC+3) göre üretilir; `SPCAD_BUILD_STAMP=YYYYMMDDHHMM` (veya `vYYYYMMDDHHMM`) ile sabitlenebilir. Derleme kimliği `SPCAD_BUILD_SHA` ortam değişkeninden gelir; paketleme betikleri bunu git başlığından üretir. `spcad --version` çıktısı sürüm ve derleme kimliğini birlikte gösterir:
 
 ```text
 spcad 0.10.0_v202610220830 (<git-sha>)
 ```
 
-Paket dosya adları `spcad-<sürüm>-<platform>-<mimari>` biçimindedir; buradaki `<sürüm>` semver çekirdeğidir. Uygulama içi sürüm aynı çekirdeğe derleme damgasını ekler.
+Paket dosya adları `spcad-<sürüm>-<platform>-<mimari>` biçimindedir; buradaki `<sürüm>` semver çekirdeğidir. Uygulama içi sürüm aynı çekirdeğe derleme damgasını ekler. `cargo xtask release` damgayı bir kez üretir ve aynı değeri hem `release/<AD>_beta-<damga>.exe` adına hem derlemeye gömülen sürüme verir; dosya adı ile Hakkında penceresi ayrışmaz.
 
 ## Depo Yapısı
 
@@ -178,7 +180,8 @@ Paket dosya adları `spcad-<sürüm>-<platform>-<mimari>` biçimindedir; buradak
 |---|---|
 | `kitapliklar/` | 12 kitaplık: `geom`, `dxf`, `color`, `doc`, `fonts`, `render`, `constraints`, `io`, `dwg`, `engine`, `ui-egui`, `mcp` |
 | `uygulamalar/` | `spcad` (masaüstü), `spcad-cli` (başsız), `spcad-web` (WASM) |
-| `xtask/` | Çalışma alanı araçları: `ci`, `layers`, `assets`, `wasm`, `parity`, `version`, `stats`, `ico` |
+| `xtask/` | Çalışma alanı araçları: `ci`, `layers`, `assets`, `wasm`, `parity`, `version`, `stats`, `ico`, `release` |
+| `release/` | Son Windows beta derlemesi (tek dosya; indirilebilir, depoya işlenir) |
 | `varliklar/uygulama-simgesi/` | SP-GROUP marka kaynağı ve üretilmiş uygulama ikonları |
 | `paketleme/` | Linux, macOS, Windows ve web paketleme tanımları; `ikonlar.py` ikon üreticisi |
 | `belgeler/` | `YAPI.md`, `mimari.md`, parite belgeleri, denetim protokolü ve ekran görüntüleri |

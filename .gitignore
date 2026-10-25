@@ -29,8 +29,8 @@ uygulamalar/spcad-web/.vite/
 /dist/
 /log/
 
-# Sürüm Çıktıları (kök release/: yalnız son derleme, `cargo xtask release` üretir)
-/release/
+# Sürüm Çıktıları: kök release/ yalnız son Windows beta derlemesini tutar ve indirilebilir
+# olması için depoya işlenir; paketleme çıktıları dist/ altında kalır (sürüm dışı).
 
 # IDE ve Ajan Dosyaları
 .idea/

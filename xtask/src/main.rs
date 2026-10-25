@@ -26,7 +26,8 @@ commands:
                   show where test corpora live; --download fetches PngSuite into corpus/pngsuite
   stats [--exact] count tests and lines per crate (--exact: ask the test harness via `-- --list`)
   parity          recompute the AutoCAD menu-breadth checklist in belgeler/parite-kontrol-listesi.md
-  release         build the release binary into release/ and keep only the latest build there
+  release         build the release binary into release/sp-group-cad_beta-vYYYYMMDDHHMM.exe
+                  (one stamp, also baked into the About window) and drop older builds
   ico <out.ico> <in.png>...
                   pack square PNGs (<= 256 px) into a Windows .ico (see paketleme/ikonlar.sh)
 ";

@@ -11,6 +11,7 @@ içindedir. Ayrıntılı teknik anlatım `belgeler/mimari.md`, ürün karşıla�
 ├── Cargo.lock                 → Kilit dosyası (depoda tutulur)
 ├── README.md                  → Kullanıcı tanıtımı, kurulum, indirme ve lisans künyesi
 ├── YOL-HARITASI.md            → Tek sayfalık yol haritası özeti
+├── release/                   → Son Windows beta derlemesi; indirilebilir tek .exe (depoya işlenir)
 ├── LICENSE-MIT / LICENSE-APACHE / NOTICE → Çift lisans ve zorunlu bildirimler
 ├── ATTRIBUTION.md             → Dosya bazlı varlık telifi (cargo xtask assets denetler)
 ├── clippy.toml / rustfmt.toml → Lint ve biçim ayarları
@@ -36,7 +37,7 @@ içindedir. Ayrıntılı teknik anlatım `belgeler/mimari.md`, ürün karşıla�
 │   └── spcad-web/             → Aynı arayüzün WASM derlemesi (DWG yok)
 │
 ├── xtask/                     → Çalışma alanı araçları: ci, layers, assets, wasm, parity,
-│   │                            version, stats, ico
+│   │                            version, stats, ico, release
 │   └── veri/menu-catalog.txt  → Menü genişliği denetiminin girdisi
 │
 ├── varliklar/uygulama-simgesi/ → Tek ikon kaynağı ve türevleri
