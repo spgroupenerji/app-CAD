@@ -81,13 +81,18 @@ fn status_labels_never_overlap_at_standard_and_compact_sizes() {
 }
 
 #[test]
-fn compact_ribbon_keeps_the_panels_that_do_not_fit_reachable() {
+fn compact_ribbon_keeps_every_panel_reachable() {
     let mut h = harness(900.0, 560.0, 1.0, false);
-    h.get_by_label("More panels").click();
+    // No global overflow menu any more: even at the minimum width the row keeps every panel of
+    // the tab, and a panel that gave up its body keeps its commands in the title menu.
+    assert!(h.query_by_label("More panels").is_none());
+    for panel in spcad_ui_egui::serit::SEKMELER[0].paneller {
+        assert!(h.query_all_by_label(panel.baslik).next().is_some(), "900 px: {} paneli şeritte görünmüyor", panel.baslik);
+    }
+    h.get_by_label("Draw").click();
     h.run_steps(3);
-    // Every panel of the tab is listed, even when its body did not fit.
-    assert!(h.query_by_label_contains("Clipboard").is_some());
-    assert!(h.query_by_label_contains("Utilities").is_some());
+    let dil = h.state().language();
+    assert!(h.query_by_label_contains(spcad_ui_egui::i18n::tr(dil, "Rectangle")).is_some());
 }
 
 #[test]

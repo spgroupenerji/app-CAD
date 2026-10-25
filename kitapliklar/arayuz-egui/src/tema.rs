@@ -298,6 +298,13 @@ pub fn small() -> FontId {
 pub fn body() -> FontId {
     FontId::new(12.5, FontFamily::Proportional)
 }
+/// Ribbon large-button label sizes, richest first. The strip uses the largest size at which every
+/// label still wraps onto at most two lines without a word being cut; the title band keeps
+/// body(), so the ribbon stays on the same typographic scale as the rest of the chrome.
+pub const SERIT_ETIKET_BOYUTLARI: [f32; 3] = [11.5, 10.5, 9.5];
+pub fn serit_etiket(boyut: f32) -> FontId {
+    FontId::new(boyut, FontFamily::Proportional)
+}
 pub fn mono() -> FontId {
     FontId::new(12.0, FontFamily::Monospace)
 }

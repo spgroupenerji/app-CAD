@@ -34,12 +34,14 @@ fn shown(harness: &Harness<'_, CadApp>, label: &str) -> bool {
 }
 
 fn hover_title(harness: &mut Harness<'_, CadApp>, name: &str) {
-    harness.get_by_role_and_label(Role::Button, name).hover();
+    // The ribbon panel titles carry the same labels as the menu bar titles; the menu bar is drawn
+    // first, so it is the first button match.
+    harness.query_all_by_role_and_label(Role::Button, name).next().expect("menu bar title").hover();
     harness.run_steps(3);
 }
 
 fn click_title(harness: &mut Harness<'_, CadApp>, name: &str) {
-    harness.get_by_role_and_label(Role::Button, name).click();
+    harness.query_all_by_role_and_label(Role::Button, name).next().expect("menu bar title").click();
     harness.run_steps(3);
 }
 

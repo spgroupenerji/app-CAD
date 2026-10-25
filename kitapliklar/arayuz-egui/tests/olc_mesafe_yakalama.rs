@@ -75,12 +75,9 @@ fn measure(paper: bool) {
     let shots = std::env::var_os("SPCAD_MEASURE_SHOTS").map(std::path::PathBuf::from);
     let mut h = harness(paper, shots.is_some());
     let dirty_before = h.state().session.state().unwrap().is_dirty();
-    // Measure Distance sits in the Utilities panel, behind the ribbon's overflow menu when the
-    // window is narrower than the whole tab.
-    h.get_by_label("More panels").click();
-    h.run_steps(3);
-
-    assert!(h.query_by_label_contains("Utilities").is_some(), "the Utilities panel is reachable from the ribbon's overflow menu");
+    // Measure Distance sits in the Utilities panel; the ribbon keeps every panel of the tab on
+    // the row, so the panel is visible without an overflow menu.
+    assert!(h.query_by_label("Utilities").is_some(), "the Utilities panel is visible on the ribbon");
     h.state_mut().start("dist");
     h.run_steps(3);
     assert_eq!(h.state().session.running.as_ref().map(|r| r.id.as_str()), Some("dist"));
