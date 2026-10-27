@@ -36,3 +36,9 @@
 - Test: eşlenen her ikonun Lucide'de bulunduğu (`cad_karsiliklari_lucide_de_bulunuyor`).
 - Şerit görüntüsü: [gercek-p4.png](gorseller/wp4/gercek-p4.png).
 - Katalog: [ikon-katalogu.png](gorseller/wp4/ikon-katalogu.png) — Lucide ve CAD ikonları yan yana.
+## Ek eşleme (P4)
+
+- Rectangle → `rectangle-horizontal`, Polygon → `pentagon`, RevCloud → `cloud`,
+  Text/MText → `type`, BlockCreate → `package`, Insert → `square-plus`,
+  BlockEdit → `square-pen`, Hatch → `paint-bucket`, Point → `dot`, Spline → `spline`.
+- `ArayuzIkonu` 53 role çıktı; adlar tekil testi geçiyor; katalog yenilendi.

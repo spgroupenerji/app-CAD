@@ -55,11 +55,21 @@ pub enum ArayuzIkonu {
     Help,
     Warning,
     Info,
+    Square,
+    Pentagon,
+    Cloud,
+    Type,
+    Box,
+    SquarePlus,
+    SquarePen,
+    PaintBucket,
+    Dot,
+    Spline,
 }
 
 impl ArayuzIkonu {
     /// Tüm ikonlar; eşleme testi bunları gezer.
-    pub const ALL: [ArayuzIkonu; 43] = [
+    pub const ALL: [ArayuzIkonu; 53] = [
         Self::Grid,
         Self::Snap,
         Self::Ortho,
@@ -103,6 +113,16 @@ impl ArayuzIkonu {
         Self::Help,
         Self::Warning,
         Self::Info,
+        Self::Square,
+        Self::Pentagon,
+        Self::Cloud,
+        Self::Type,
+        Self::Box,
+        Self::SquarePlus,
+        Self::SquarePen,
+        Self::PaintBucket,
+        Self::Dot,
+        Self::Spline,
     ];
 
     /// Lucide adı.
@@ -151,6 +171,16 @@ impl ArayuzIkonu {
             Self::Help => "circle-question-mark",
             Self::Warning => "triangle-alert",
             Self::Info => "info",
+            Self::Square => "rectangle-horizontal",
+            Self::Pentagon => "pentagon",
+            Self::Cloud => "cloud",
+            Self::Type => "type",
+            Self::Box => "package",
+            Self::SquarePlus => "square-plus",
+            Self::SquarePen => "square-pen",
+            Self::PaintBucket => "paint-bucket",
+            Self::Dot => "dot",
+            Self::Spline => "spline",
         }
     }
 
@@ -236,6 +266,16 @@ pub fn cad_esleme(ikon: crate::simgeler::Icon) -> Option<ArayuzIkonu> {
         C::Close => ArayuzIkonu::Close,
         C::Search => ArayuzIkonu::Search,
         C::Measure | C::Distance => ArayuzIkonu::Ruler,
+        C::Rectangle => ArayuzIkonu::Square,
+        C::Polygon => ArayuzIkonu::Pentagon,
+        C::RevCloud => ArayuzIkonu::Cloud,
+        C::Text | C::MText => ArayuzIkonu::Type,
+        C::BlockCreate => ArayuzIkonu::Box,
+        C::Insert => ArayuzIkonu::SquarePlus,
+        C::BlockEdit => ArayuzIkonu::SquarePen,
+        C::Hatch => ArayuzIkonu::PaintBucket,
+        C::Point => ArayuzIkonu::Dot,
+        C::Spline => ArayuzIkonu::Spline,
         _ => return None,
     })
 }
