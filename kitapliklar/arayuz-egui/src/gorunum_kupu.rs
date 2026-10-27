@@ -37,15 +37,15 @@ pub struct Layout {
 
 impl Layout {
     pub fn new(canvas: Rect) -> Self {
-        let center = pos2(canvas.right() - 92.0, canvas.top() + 82.0);
-        let ring = 58.0;
+        let center = pos2(canvas.right() - 86.0, canvas.top() + 76.0);
+        let ring = 50.0;
         Layout {
             center,
             ring,
-            face: Rect::from_center_size(center, vec2(44.0, 44.0)),
-            home: Rect::from_center_size(center + vec2(-ring + 2.0, -ring + 2.0), vec2(20.0, 20.0)),
-            pill: Rect::from_center_size(center + vec2(0.0, ring + 26.0), vec2(56.0, 16.0)),
-            bounds: Rect::from_center_size(center, vec2(2.0 * (ring + 10.0), 2.0 * (ring + 10.0))),
+            face: Rect::from_center_size(center, vec2(42.0, 42.0)),
+            home: Rect::from_center_size(center + vec2(-ring + 4.0, -ring + 4.0), vec2(18.0, 18.0)),
+            pill: Rect::from_center_size(center + vec2(0.0, ring + 22.0), vec2(52.0, 16.0)),
+            bounds: Rect::from_center_size(center, vec2(2.0 * (ring + 8.0), 2.0 * (ring + 8.0))),
         }
     }
 
@@ -85,21 +85,22 @@ pub fn show(app: &mut CadApp, ui: &mut egui::Ui, l: &Layout) {
     let resp = ui.interact(l.bounds, ui.id().with("viewcube"), Sense::click_and_drag());
     let part = resp.hover_pos().and_then(|p| l.part_at(p));
     let p = ui.painter_at(l.bounds.union(l.pill));
-    let ring_col = if part == Some(Part::Ring) { Color32::from_rgb(0x5c, 0x67, 0x7c) } else { Color32::from_rgb(0x48, 0x50, 0x5c) };
-    p.circle_stroke(l.center, l.ring, Stroke::new(9.0, ring_col));
-    p.circle_stroke(l.center, l.ring + 4.5, Stroke::new(1.0, Color32::from_rgb(0x5c, 0x65, 0x72)));
-    let f = egui::FontId::proportional(17.0);
-    let lc = Color32::from_rgb(0xc8, 0xcc, 0xd2);
+    let t = Tokens::get();
+    let ring_col = if part == Some(Part::Ring) { t.accent } else { t.border };
+    p.circle_stroke(l.center, l.ring, Stroke::new(1.5, ring_col));
+    p.circle_stroke(l.center, l.ring + 1.0, Stroke::new(0.5, t.border.gamma_multiply(0.5)));
+    let f = egui::FontId::proportional(10.5);
+    let lc = t.text_faint;
     let c = l.center;
     let ring = l.ring;
     p.text(c + vec2(0.0, -ring - 1.0), egui::Align2::CENTER_CENTER, crate::tl!("N"), f.clone(), lc);
     p.text(c + vec2(0.0, ring + 1.0), egui::Align2::CENTER_CENTER, crate::tl!("S"), f.clone(), lc);
     p.text(c + vec2(ring + 1.0, 0.0), egui::Align2::CENTER_CENTER, crate::tl!("E"), f.clone(), lc);
     p.text(c + vec2(-ring - 1.0, 0.0), egui::Align2::CENTER_CENTER, crate::tl!("W"), f, lc);
-    let face_col = if part == Some(Part::Face) { Color32::from_rgb(0xb8, 0xbc, 0xc2) } else { Color32::from_rgb(0x9a, 0x9e, 0xa4) };
-    p.rect_filled(l.face, 2.0, face_col);
-    p.rect_stroke(l.face, 2.0, Stroke::new(1.0, Color32::from_rgb(0x6c, 0x70, 0x76)), egui::StrokeKind::Inside);
-    p.text(c, egui::Align2::CENTER_CENTER, crate::tl!("TOP"), egui::FontId::proportional(13.0), Color32::from_rgb(0x50, 0x54, 0x5a));
+    let face_col = if part == Some(Part::Face) { t.accent } else { t.control };
+    p.rect_filled(l.face, 6.0, face_col);
+    p.rect_stroke(l.face, 6.0, Stroke::new(1.0, if part == Some(Part::Face) { t.text } else { t.border }), egui::StrokeKind::Inside);
+    p.text(c, egui::Align2::CENTER_CENTER, crate::tl!("TOP"), egui::FontId::proportional(11.0), t.text);
     paint_home(&p, l.home, part == Some(Part::Home));
 
     let resp = match part {
@@ -252,7 +253,7 @@ mod testler {
         assert_eq!(l.part_at(l.home.center()), Some(Part::Home));
         assert_eq!(l.part_at(l.center + vec2(0.0, -l.ring)), Some(Part::Ring), "N");
         assert_eq!(l.part_at(l.center + vec2(l.ring + 3.0, 0.0)), Some(Part::Ring), "E");
-        assert_eq!(l.part_at(l.center + vec2(30.0, 30.0)), None, "between the face and the ring");
+        assert_eq!(l.part_at(l.center + vec2(25.0, 25.0)), None, "between the face and the ring");
         assert!(l.bounds.contains_rect(l.home) && l.bounds.contains_rect(l.face));
     }
 

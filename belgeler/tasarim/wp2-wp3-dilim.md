@@ -40,3 +40,10 @@
 - Giriş alanı artık `t.field` dolgusu + 1 px `cmd_border` + 4 px köşe ile çerçeveli.
 - Boşken "Command:" yanında "Type a command, or press Ctrl+K" ipucu (uk/tr çevirileri eklendi).
 - Görüntü: [gercek-p3b.png](gorseller/wp3/gercek-p3b.png).
+## ViewCube (P3 dilimi)
+
+- Halka 58 → 50 px, kalınlık 9 → 1,5 px; ikinci halka 0,5 px soluk.
+- Yüz 44 → 42 px, 6 px köşe; pasif `control`, hover `accent`; yazı 13 → 11 px.
+- Pusula harfleri 17 → 10,5 px ve `text_faint`; Home 20 → 18 px.
+- WCS pill 56 → 52 px, merkeze 26 → 22 px.
+- Görüntü: [gercek-viewcube.png](gorseller/wp4/gercek-viewcube.png). Test geometrisi yeni halkaya göre güncellendi.
