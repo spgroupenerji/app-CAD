@@ -197,6 +197,49 @@ pub fn ciz(painter: &Painter, merkez: Pos2, ikon: ArayuzIkonu, boyut: f32, renk:
     }
 }
 
+/// Genel amaçlı CAD ikonlarının Lucide karşılığı; CAD semantiği taşıyanlar `None` kalır.
+pub fn cad_esleme(ikon: crate::simgeler::Icon) -> Option<ArayuzIkonu> {
+    use crate::simgeler::Icon as C;
+    Some(match ikon {
+        C::New => ArayuzIkonu::File,
+        C::Open => ArayuzIkonu::FolderOpen,
+        C::Save | C::SaveAs => ArayuzIkonu::Save,
+        C::Undo => ArayuzIkonu::Undo,
+        C::Redo => ArayuzIkonu::Redo,
+        C::Plot | C::Publish => ArayuzIkonu::Print,
+        C::PageSetup | C::Import | C::Export | C::Attach => ArayuzIkonu::File,
+        C::Preview => ArayuzIkonu::Annotation,
+        C::ZoomWindow | C::ZoomExtents => ArayuzIkonu::ZoomIn,
+        C::Pan => ArayuzIkonu::Hand,
+        C::Layers => ArayuzIkonu::Layers,
+        C::Help => ArayuzIkonu::Help,
+        C::Table => ArayuzIkonu::Table,
+        C::Erase => ArayuzIkonu::Trash,
+        C::Lock => ArayuzIkonu::Lock,
+        C::Unlock => ArayuzIkonu::Unlock,
+        C::Snowflake => ArayuzIkonu::Freeze,
+        C::Grid => ArayuzIkonu::Grid,
+        C::Snap => ArayuzIkonu::Snap,
+        C::Ortho => ArayuzIkonu::Ortho,
+        C::Polar => ArayuzIkonu::Polar,
+        C::Osnap => ArayuzIkonu::Osnap,
+        C::OTrack => ArayuzIkonu::Track,
+        C::Lineweight => ArayuzIkonu::Lineweight,
+        C::Transparency => ArayuzIkonu::Transparency,
+        C::Isodraft => ArayuzIkonu::Isodraft,
+        C::DynInput => ArayuzIkonu::DynInput,
+        C::QuickProps => ArayuzIkonu::QuickProps,
+        C::Gear => ArayuzIkonu::Settings,
+        C::Annotation => ArayuzIkonu::Annotation,
+        C::Workspace => ArayuzIkonu::Workspace,
+        C::Plus => ArayuzIkonu::Plus,
+        C::Close => ArayuzIkonu::Close,
+        C::Search => ArayuzIkonu::Search,
+        C::Measure | C::Distance => ArayuzIkonu::Ruler,
+        _ => return None,
+    })
+}
+
 #[cfg(test)]
 mod testler {
     use super::ArayuzIkonu;
@@ -214,5 +257,17 @@ mod testler {
         adlar.sort_unstable();
         adlar.dedup();
         assert_eq!(adlar.len(), ArayuzIkonu::ALL.len());
+    }
+
+    #[test]
+    fn cad_karsiliklari_lucide_de_bulunuyor() {
+        let mut sayi = 0;
+        for ikon in crate::simgeler::Icon::ALL {
+            if let Some(hedef) = super::cad_esleme(*ikon) {
+                assert!(hedef.glyph().is_some(), "{hedef:?}");
+                sayi += 1;
+            }
+        }
+        assert!(sayi >= 25, "eşlenen ikon sayısı: {sayi}");
     }
 }

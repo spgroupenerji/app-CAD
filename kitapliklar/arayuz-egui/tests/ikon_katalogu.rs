@@ -39,6 +39,7 @@ fn katalog_sayfasi() {
             }
         });
     });
+    tema::install_fonts(&h.ctx, "en");
     tema::apply(&h.ctx, egui::Theme::Dark, false);
     h.run();
     let img = h.render().expect("render");

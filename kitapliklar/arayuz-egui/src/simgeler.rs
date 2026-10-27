@@ -378,6 +378,11 @@ impl Pen<'_> {
 /// Paint `icon` into `rect` (square), with `dim` for disabled.
 pub fn paint(p: &Painter, rect: Rect, icon: Icon, dim: bool) {
     let t = Tokens::get();
+    if let Some(hedef) = crate::ikonlar::cad_esleme(icon) {
+        let renk = if dim { t.icon.gamma_multiply(0.4) } else { t.icon };
+        crate::ikonlar::ciz(p, rect.center(), hedef, (rect.width() * 0.95).max(12.0), renk);
+        return;
+    }
     let alpha = |c: Color32| if dim { c.gamma_multiply(0.4) } else { c };
     let pen = Pen { p, r: rect, w: (rect.width() / 16.0).clamp(1.0, 1.6), base: alpha(t.icon), acc: alpha(t.icon_accent), pt: alpha(t.icon_point) };
     let (b, a) = (pen.base, pen.acc);

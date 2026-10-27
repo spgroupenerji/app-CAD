@@ -24,3 +24,15 @@
 1. Şeritteki ~40 ikonun 24×24 / 1,5 px kuralıyla yeniden çizimi (Line, Polyline, Circle, Arc, Move, Copy, Rotate, Trim, Hatch, MText, Dimension, Layer, Block, Zoom, Pan…).
 2. Kalan simgeler için aynı kural; her partide katalog sayfası + gözle onay.
 3. Katalog testi görsel regresyon kapısına bağlanır (P5 golden).
+## Lucide eşlemesi (P4 dilimi)
+
+- `ikonlar::cad_esleme` — genel amaçlı 35 CAD ikonu Lucide glyph'ine bağlandı:
+  New/Open/Save/SaveAs, Undo/Redo, Plot/Publish/PageSetup/Import/Export/Attach/Preview,
+  ZoomWindow/ZoomExtents/Pan, Layers/Help/Table, Erase, Lock/Unlock, Snowflake,
+  Grid/Snap/Ortho/Polar/Osnap/OTrack, Lineweight/Transparency/Isodraft/DynInput/QuickProps,
+  Gear/Annotation/Workspace/Plus/Close/Search, Measure/Distance.
+- `simgeler::paint` eşlenen ikonlarda doğrudan Lucide glyph'i çizer; CAD semantiği taşıyan
+  106 ikon (Line, Trim, Fillet, Hatch, Dimension…) kendi çiziminde kalır.
+- Test: eşlenen her ikonun Lucide'de bulunduğu (`cad_karsiliklari_lucide_de_bulunuyor`).
+- Şerit görüntüsü: [gercek-p4.png](gorseller/wp4/gercek-p4.png).
+- Katalog: [ikon-katalogu.png](gorseller/wp4/ikon-katalogu.png) — Lucide ve CAD ikonları yan yana.
