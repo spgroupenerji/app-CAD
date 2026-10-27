@@ -53,3 +53,8 @@
 - Pasif hover: 4 px yuvarlak, %35 `control_hover`; sekme yazısı `body()` (12,5 px).
 - Hızlı erişim ikonları (New/Open/Save/Undo/Redo/Plot) artık Lucide glyph'leri (P4 eşlemesi).
 - Görüntü: [gercek-sekmeler.png](gorseller/wp4/gercek-sekmeler.png).
+## Dosya sekmeleri (P3 dilimi)
+
+- Aktif dosya sekmesi: üst köşeler 6 px yuvarlak `tab_active` zemini + 2 px `accent` alt çizgisi.
+- Pasif sekmeler düz; hover `chrome`; kapatma ikonu hâlâ Lucide `close`.
+- Görüntü: [gercek-dosyasekmeleri.png](gorseller/wp4/gercek-dosyasekmeleri.png).

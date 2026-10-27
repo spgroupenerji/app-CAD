@@ -85,17 +85,19 @@ pub fn file_tabs(app: &mut CadApp, ui: &mut egui::Ui) {
             |ui: &mut egui::Ui, label: &str, dirty: bool, active: bool, closable: bool, w: f32, id: egui::Id| -> (bool, bool, egui::Response) {
                 let tr = Rect::from_min_size(pos2(x, r.top()), vec2(w, r.height()));
                 let resp = ui.interact(tr, id, Sense::click());
-                ui.painter().rect_filled(
-                    tr,
-                    0.0,
-                    if active {
-                        t.tab_active
-                    } else if resp.hovered() {
-                        t.chrome
-                    } else {
-                        t.chrome_dark
-                    },
-                );
+                let dolgu = if active {
+                    t.tab_active
+                } else if resp.hovered() {
+                    t.chrome
+                } else {
+                    t.chrome_dark
+                };
+                let ust = egui::CornerRadius { nw: 6, ne: 6, sw: 0, se: 0 };
+                ui.painter().rect_filled(tr, if active { ust } else { egui::CornerRadius::ZERO }, dolgu);
+                if active {
+                    let alt = Rect::from_min_max(pos2(tr.left() + 8.0, tr.bottom() - 2.0), pos2(tr.right() - 8.0, tr.bottom()));
+                    ui.painter().rect_filled(alt, 1.0, t.accent);
+                }
                 // The name ends in "…" when it doesn't fit before the close button (#513).
                 let color = if active { t.text } else { t.text_dim };
                 let mark = if dirty { "*" } else { "" };
