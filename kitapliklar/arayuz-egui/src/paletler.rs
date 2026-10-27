@@ -22,14 +22,11 @@ pub mod raf;
 
 fn section_header(ui: &mut egui::Ui, title: &str) -> Rect {
     let t = Tokens::get();
-    let (hr, _) = ui.allocate_exact_size(vec2(ui.available_width(), 26.0), Sense::hover());
-    ui.painter().text(
-        pos2(hr.left() + 10.0, hr.center().y),
-        egui::Align2::LEFT_CENTER,
-        crate::i18n::t(title),
-        egui::FontId::proportional(14.0),
-        t.text,
-    );
+    let (hr, _) = ui.allocate_exact_size(vec2(ui.available_width(), 30.0), Sense::hover());
+    let p = ui.painter();
+    p.rect_filled(hr, 0.0, t.chrome_dark);
+    p.hline(hr.x_range(), hr.bottom(), Stroke::new(1.0, t.border));
+    p.text(pos2(hr.left() + 10.0, hr.center().y), egui::Align2::LEFT_CENTER, crate::i18n::t(title), egui::FontId::proportional(11.5), t.text_faint);
     hr
 }
 
