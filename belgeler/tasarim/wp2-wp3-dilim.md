@@ -63,3 +63,8 @@
 - `ui.set {"theme":"light"}` ile açık tema gerçek uygulamada çekildi: [gercek-acik-tema.png](gorseller/wp4/gercek-acik-tema.png).
 - Krom/paneller açık, tuval tasarım gereği koyu kalıyor; Lucide ve CAD ikonları okunaklı; komut çubuğu alanı çerçeveli.
 - Koyu temada doğrulanan token seti açık temada da tutarlı; ek düzeltme gerekmedi.
+## Diyalog iç yüzeyi (P2 dilimi)
+
+- Options içerik alanı `chrome_dark` dolgu ile pencere yüzeyinden ayrıldı (18/14 iç boşluk).
+- Aktif sekmenin üstünde 2 px `accent` çizgisi; pasif sekmelerde alt kenarlık korunuyor.
+- Görüntü: [gercek-diyalog2.png](gorseller/wp4/gercek-diyalog2.png).

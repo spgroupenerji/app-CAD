@@ -57,7 +57,7 @@ pub fn dialog(app: &mut CadApp, ctx: &egui::Context, name: &str, open: &mut bool
             if let Some(t) = sekme_seridi(ui, tab) {
                 next_tab = Some(t);
             }
-            egui::Frame::NONE.fill(Tokens::get().panel).inner_margin(egui::Margin::symmetric(18, 14)).show(ui, |ui| {
+            egui::Frame::NONE.fill(Tokens::get().chrome_dark).inner_margin(egui::Margin::symmetric(18, 14)).show(ui, |ui| {
                 ui.set_width(WIDTH - 4.0);
                 let top = ui.cursor().top();
                 match tab {
@@ -127,7 +127,9 @@ fn sekme_seridi(ui: &mut egui::Ui, open: &str) -> Option<&'static str> {
         ui.painter().line_segment([tr.left_top(), tr.right_top()], Stroke::new(1.0, t.border));
         ui.painter().line_segment([tr.left_top(), tr.left_bottom()], Stroke::new(1.0, t.border));
         ui.painter().line_segment([tr.right_top(), tr.right_bottom()], Stroke::new(1.0, t.border));
-        if !on {
+        if on {
+            ui.painter().rect_filled(Rect::from_min_max(tr.left_top(), pos2(tr.right(), tr.top() + 2.0)), 1.0, t.accent);
+        } else {
             ui.painter().line_segment([tr.left_bottom(), tr.right_bottom()], Stroke::new(1.0, t.border));
         }
         let color = if on { t.text } else { t.text_dim };
