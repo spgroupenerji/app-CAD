@@ -42,3 +42,13 @@
   Text/MText → `type`, BlockCreate → `package`, Insert → `square-plus`,
   BlockEdit → `square-pen`, Hatch → `paint-bucket`, Point → `dot`, Spline → `spline`.
 - `ArayuzIkonu` 53 role çıktı; adlar tekil testi geçiyor; katalog yenilendi.
+## İlk çizim partisi (P4)
+
+- Point: artı kolları 5–19 → **2–22**; merkez nokta korundu.
+- Ray: 5–19 → **2–22**; XLine zaten 1–23.
+- Donut: dış yarıçap 8 → **9,5**, iç 4,5 → **5,5**.
+- Boundary: 4–20 → **2–22**; iç daire 6 → 7.
+- Region: poligon **2–22** aralığına genişletildi.
+- Wipeout: 3–16 → **2–18**.
+- Table: 3–21 → **2–22**; satır çizgileri 7/12/17.
+- Katalog: [ikon-katalogu.png](gorseller/wp4/ikon-katalogu.png).

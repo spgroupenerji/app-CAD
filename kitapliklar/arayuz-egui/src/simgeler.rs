@@ -569,22 +569,22 @@ pub fn paint(p: &Painter, rect: Rect, icon: Icon, dim: bool) {
         }
         Point => {
             pen.dot(12.0, 12.0);
-            pen.l(12.0, 5.0, 12.0, 9.0);
-            pen.l(12.0, 15.0, 12.0, 19.0);
-            pen.l(5.0, 12.0, 9.0, 12.0);
-            pen.l(15.0, 12.0, 19.0, 12.0);
+            pen.l(12.0, 2.0, 12.0, 8.0);
+            pen.l(12.0, 16.0, 12.0, 22.0);
+            pen.l(2.0, 12.0, 8.0, 12.0);
+            pen.l(16.0, 12.0, 22.0, 12.0);
         }
         XLine => {
             pen.la(1.0, 22.0, 23.0, 2.0);
             pen.dot(12.0, 12.0);
         }
         Ray => {
-            pen.la(5.0, 19.0, 23.0, 3.0);
-            pen.dot(5.0, 19.0);
+            pen.la(2.0, 22.0, 22.0, 2.0);
+            pen.dot(2.0, 22.0);
         }
         Donut => {
-            pen.c(12.0, 12.0, 8.0, a);
-            pen.c(12.0, 12.0, 4.5, a);
+            pen.c(12.0, 12.0, 9.5, a);
+            pen.c(12.0, 12.0, 5.5, a);
             pen.fill_c(12.0, 12.0, 1.0, b);
         }
         RevCloud => {
@@ -611,28 +611,28 @@ pub fn paint(p: &Painter, rect: Rect, icon: Icon, dim: bool) {
             pen.rect(3.0, 3.0, 18.0, 18.0, b);
         }
         Boundary => {
-            pen.rect(4.0, 4.0, 16.0, 16.0, b);
-            pen.c(12.0, 12.0, 6.0, b);
-            pen.poly(&[(4.0, 4.0), (20.0, 4.0), (20.0, 20.0), (4.0, 20.0)], true, a);
-            pen.dot(6.0, 6.0);
+            pen.rect(2.0, 2.0, 20.0, 20.0, b);
+            pen.c(12.0, 12.0, 7.0, b);
+            pen.poly(&[(2.0, 2.0), (22.0, 2.0), (22.0, 22.0), (2.0, 22.0)], true, a);
+            pen.dot(4.0, 4.0);
         }
         Region => {
-            pen.poly(&[(4.0, 18.0), (6.0, 6.0), (16.0, 4.0), (20.0, 14.0), (12.0, 20.0)], true, a);
-            pen.fill_c(12.0, 12.0, 3.0, a.gamma_multiply(0.5));
+            pen.poly(&[(2.0, 20.0), (4.0, 4.0), (18.0, 2.0), (22.0, 14.0), (12.0, 22.0)], true, a);
+            pen.fill_c(12.0, 12.0, 4.0, a.gamma_multiply(0.5));
         }
         Wipeout => {
-            pen.rect(3.0, 3.0, 13.0, 13.0, b);
-            pen.fill_rect(8.0, 8.0, 13.0, 13.0, Tokens::get().chrome);
-            pen.rect(8.0, 8.0, 13.0, 13.0, a);
+            pen.rect(2.0, 2.0, 14.0, 14.0, b);
+            pen.fill_rect(8.0, 8.0, 14.0, 14.0, Tokens::get().chrome);
+            pen.rect(8.0, 8.0, 14.0, 14.0, a);
         }
         Table => {
-            pen.rect(3.0, 4.0, 18.0, 16.0, b);
-            pen.fill_rect(3.0, 4.0, 18.0, 4.0, a.gamma_multiply(0.6));
-            for y in [8.0, 12.0, 16.0] {
-                pen.l(3.0, y, 21.0, y);
+            pen.rect(2.0, 3.0, 20.0, 18.0, b);
+            pen.fill_rect(2.0, 3.0, 20.0, 4.0, a.gamma_multiply(0.6));
+            for y in [7.0, 12.0, 17.0] {
+                pen.l(2.0, y, 22.0, y);
             }
-            pen.l(9.0, 8.0, 9.0, 20.0);
-            pen.l(15.0, 8.0, 15.0, 20.0);
+            pen.l(9.0, 7.0, 9.0, 21.0);
+            pen.l(15.0, 7.0, 15.0, 21.0);
         }
         Text => pen.text(12.0, 12.5, "A", 19.0, b),
         MText => {

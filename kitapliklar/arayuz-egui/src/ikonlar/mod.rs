@@ -274,7 +274,6 @@ pub fn cad_esleme(ikon: crate::simgeler::Icon) -> Option<ArayuzIkonu> {
         C::Insert => ArayuzIkonu::SquarePlus,
         C::BlockEdit => ArayuzIkonu::SquarePen,
         C::Hatch => ArayuzIkonu::PaintBucket,
-        C::Point => ArayuzIkonu::Dot,
         C::Spline => ArayuzIkonu::Spline,
         _ => return None,
     })
