@@ -838,13 +838,15 @@ fn visuals(theme: Theme) -> Visuals {
     v.window_stroke = egui::Stroke::new(1.0, t.border);
     let shadow = Color32::from_black_alpha(if theme == Theme::Dark { 140 } else { 50 });
     v.popup_shadow = egui::epaint::Shadow { offset: [0, 8], blur: 24, spread: 0, color: shadow };
+    v.window_shadow =
+        egui::epaint::Shadow { offset: [0, 16], blur: 40, spread: 0, color: Color32::from_black_alpha(if theme == Theme::Dark { 160 } else { 60 }) };
     let yuvarlak = egui::CornerRadius::same(KOSE_ORTA);
     v.widgets.noninteractive.corner_radius = yuvarlak;
     v.widgets.inactive.corner_radius = yuvarlak;
     v.widgets.hovered.corner_radius = yuvarlak;
     v.widgets.active.corner_radius = yuvarlak;
     v.window_corner_radius = egui::CornerRadius::same(KOSE_BUYUK);
-    v.menu_corner_radius = egui::CornerRadius::same(KOSE_ORTA);
+    v.menu_corner_radius = egui::CornerRadius::same(KOSE_BUYUK);
     v
 }
 
@@ -1073,5 +1075,25 @@ mod olcek_testleri {
         assert!(KOSE_ORTA < KOSE_BUYUK);
         assert!(HAREKET_HIZLI < HAREKET_ORTA);
         assert!(HAREKET_ORTA < HAREKET_YAVAS);
+    }
+}
+/// Tokens alanlarının Semantik sözlüğüyle tutarlılığı (P5 governance).
+#[cfg(test)]
+mod semantik_tutarlilik_testleri {
+    use super::{Semantik, Tokens};
+
+    #[test]
+    fn tokens_semantik_rollerini_koruyor() {
+        assert_eq!(Tokens::DARK.panel, Semantik::DARK.card);
+        assert_eq!(Tokens::DARK.text, Semantik::DARK.foreground);
+        assert_eq!(Tokens::DARK.text_dim, Semantik::DARK.muted_foreground);
+        assert_eq!(Tokens::DARK.border, Semantik::DARK.border);
+        assert_eq!(Tokens::DARK.accent, Semantik::DARK.primary);
+        assert_eq!(Tokens::DARK.field, Semantik::DARK.input);
+        assert_eq!(Tokens::DARK.warn, Semantik::DARK.warning);
+        assert_eq!(Tokens::LIGHT.panel, Semantik::LIGHT.card);
+        assert_eq!(Tokens::LIGHT.text, Semantik::LIGHT.foreground);
+        assert_eq!(Tokens::LIGHT.border, Semantik::LIGHT.border);
+        assert_eq!(Tokens::LIGHT.accent, Semantik::LIGHT.primary);
     }
 }
