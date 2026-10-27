@@ -58,3 +58,8 @@
 - Aktif dosya sekmesi: üst köşeler 6 px yuvarlak `tab_active` zemini + 2 px `accent` alt çizgisi.
 - Pasif sekmeler düz; hover `chrome`; kapatma ikonu hâlâ Lucide `close`.
 - Görüntü: [gercek-dosyasekmeleri.png](gorseller/wp4/gercek-dosyasekmeleri.png).
+## Açık tema doğrulaması (P5 dilimi)
+
+- `ui.set {"theme":"light"}` ile açık tema gerçek uygulamada çekildi: [gercek-acik-tema.png](gorseller/wp4/gercek-acik-tema.png).
+- Krom/paneller açık, tuval tasarım gereği koyu kalıyor; Lucide ve CAD ikonları okunaklı; komut çubuğu alanı çerçeveli.
+- Koyu temada doğrulanan token seti açık temada da tutarlı; ek düzeltme gerekmedi.
