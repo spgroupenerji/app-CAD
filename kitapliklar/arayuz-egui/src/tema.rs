@@ -824,6 +824,17 @@ fn visuals(theme: Theme) -> Visuals {
     v.widgets.active.bg_fill = t.accent;
     v.widgets.active.weak_bg_fill = t.accent;
     v.selection.bg_fill = t.select_bg;
+    v.selection.stroke = egui::Stroke::new(1.0, t.selection);
+    v.hyperlink_color = t.accent;
+    v.warn_fg_color = t.warn;
+    v.widgets.noninteractive.bg_stroke = egui::Stroke::new(1.0, t.border);
+    v.widgets.inactive.bg_stroke = egui::Stroke::new(1.0, t.border);
+    v.widgets.hovered.bg_stroke = egui::Stroke::new(1.0, t.selection);
+    v.widgets.active.bg_stroke = egui::Stroke::new(1.0, t.selection);
+    v.widgets.noninteractive.expansion = 0.0;
+    v.widgets.inactive.expansion = 0.0;
+    v.widgets.hovered.expansion = 0.0;
+    v.widgets.active.expansion = 0.0;
     v.window_stroke = egui::Stroke::new(1.0, t.border);
     let shadow = Color32::from_black_alpha(if theme == Theme::Dark { 140 } else { 50 });
     v.popup_shadow = egui::epaint::Shadow { offset: [0, 8], blur: 24, spread: 0, color: shadow };
