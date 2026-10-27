@@ -720,18 +720,21 @@ pub fn show(app: &mut CadApp, ui: &mut egui::Ui) {
     egui::Panel::top("cc_ribbon").exact_size(SEKME_Y + GOVDE_Y).frame(egui::Frame::NONE.fill(t.chrome)).show(ui, |ui| {
         let r = ui.max_rect();
         let p = ui.painter().clone();
-        let tab_font = FontId::proportional(13.0);
+        let tab_font = crate::tema::body();
         let mut x = r.left() + 6.0;
         for s in SEKMELER {
             let g = p.layout_no_wrap(crate::i18n::t(s.baslik).to_string(), tab_font.clone(), t.text);
-            let w = g.size().x + 26.0;
+            let w = g.size().x + 24.0;
             let tr = Rect::from_min_size(pos2(x, r.top()), vec2(w, SEKME_Y));
             let resp = ui.interact(tr, ui.id().with(("serit_sekme", s.id)), Sense::click());
             let on = s.id == active;
             if on {
-                p.rect_filled(tr, 0.0, t.panel);
+                let ust = egui::CornerRadius { nw: 6, ne: 6, sw: 0, se: 0 };
+                p.rect_filled(tr, ust, t.panel);
+                let alt = Rect::from_min_max(pos2(tr.left() + 8.0, tr.bottom() - 2.0), pos2(tr.right() - 8.0, tr.bottom()));
+                p.rect_filled(alt, 1.0, t.accent);
             } else if resp.hovered() {
-                p.rect_filled(tr, 0.0, t.control_hover.gamma_multiply(0.55));
+                p.rect_filled(tr, 4.0, t.control_hover.gamma_multiply(0.35));
             }
             let color = if on { t.text } else { t.text_dim };
             p.galley(pos2(tr.center().x - g.size().x / 2.0, tr.center().y - g.size().y / 2.0), g, color);

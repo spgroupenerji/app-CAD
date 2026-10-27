@@ -47,3 +47,9 @@
 - Pusula harfleri 17 → 10,5 px ve `text_faint`; Home 20 → 18 px.
 - WCS pill 56 → 52 px, merkeze 26 → 22 px.
 - Görüntü: [gercek-viewcube.png](gorseller/wp4/gercek-viewcube.png). Test geometrisi yeni halkaya göre güncellendi.
+## Şerit sekmeleri (P3 dilimi)
+
+- Aktif sekme: üst köşeleri 6 px yuvarlak `panel` zemini + altında 2 px `accent` çizgisi.
+- Pasif hover: 4 px yuvarlak, %35 `control_hover`; sekme yazısı `body()` (12,5 px).
+- Hızlı erişim ikonları (New/Open/Save/Undo/Redo/Plot) artık Lucide glyph'leri (P4 eşlemesi).
+- Görüntü: [gercek-sekmeler.png](gorseller/wp4/gercek-sekmeler.png).
