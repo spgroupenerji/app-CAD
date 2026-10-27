@@ -23,9 +23,9 @@ pub(super) const TABS: [(&str, &str); 6] = [
     ("profiles", "Profiles"),
 ];
 
-const WIDTH: f32 = 720.0;
-const MIN_TAB_HEIGHT: f32 = 420.0;
-const TAB_H: f32 = 30.0;
+const WIDTH: f32 = 760.0;
+const MIN_TAB_HEIGHT: f32 = 440.0;
+const TAB_H: f32 = 36.0;
 
 /// Show the Options dialog (`name` is `"options"` or `"options:<tab>"`).
 pub fn dialog(app: &mut CadApp, ctx: &egui::Context, name: &str, open: &mut bool) {
@@ -57,7 +57,7 @@ pub fn dialog(app: &mut CadApp, ctx: &egui::Context, name: &str, open: &mut bool
             if let Some(t) = sekme_seridi(ui, tab) {
                 next_tab = Some(t);
             }
-            egui::Frame::NONE.fill(Tokens::get().panel).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
+            egui::Frame::NONE.fill(Tokens::get().panel).inner_margin(egui::Margin::symmetric(18, 14)).show(ui, |ui| {
                 ui.set_width(WIDTH - 4.0);
                 let top = ui.cursor().top();
                 match tab {

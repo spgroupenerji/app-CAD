@@ -35,7 +35,7 @@ pub struct CmdLine {
 
 /// The most history lines the command line shows above its bar.
 pub const MAX_LINES: usize = 12;
-const LINE_H: f32 = 16.0;
+const LINE_H: f32 = 18.0;
 
 /// The Dynamic Input frame for the prompt on screen, or `None` when the value boxes are not live
 /// (Dynamic Input off, no point prompt or a pending selection window).
@@ -402,7 +402,7 @@ fn history_height(app: &CadApp) -> f32 {
     visible_lines(app) as f32 * LINE_H + 2.0
 }
 
-const BAR_H: f32 = 26.0;
+const BAR_H: f32 = 34.0;
 
 /// The docked command line at the bottom of the window: history above, the prompt and typed text
 /// below, and the AutoComplete list over the drawing area.

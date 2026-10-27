@@ -45,8 +45,8 @@ fn kis(ui: &egui::Ui, text: &str, color: egui::Color32, max_width: f32) -> std::
     ui.painter().layout_job(job)
 }
 
-const SATIR: f32 = 28.0;
-const BASLIK: f32 = 28.0;
+const SATIR: f32 = 30.0;
+const BASLIK: f32 = 30.0;
 
 pub fn shelf(app: &mut CadApp, ui: &mut egui::Ui) {
     let t = Tokens::get();

@@ -1038,3 +1038,29 @@ mod semantik_testleri {
         assert!(Semantik::DARK.background != Semantik::LIGHT.background);
     }
 }
+
+/// Ölçek tokenlarının tutarlılığı (P5 kapısı): 4 pt ızgara, artan tipografi/yarıçap/hareket.
+#[cfg(test)]
+mod olcek_testleri {
+    use super::*;
+
+    #[test]
+    fn bosluklar_dort_pt_tabanli() {
+        for bosluk in [BOSLUK_1, BOSLUK_2, BOSLUK_3, BOSLUK_4, BOSLUK_5, BOSLUK_6] {
+            assert!((bosluk % 4.0).abs() < f32::EPSILON, "{bosluk} 4'ün katı değil");
+        }
+        assert!((SATIR_YUKSEKLIK % 4.0).abs() < f32::EPSILON);
+    }
+
+    #[test]
+    fn olcekler_artan_sirada() {
+        assert!(YAZI_MIKRO < YAZI_KUCUK);
+        assert!(YAZI_KUCUK < YAZI_GOVDE);
+        assert!(YAZI_GOVDE < YAZI_VURGU);
+        assert!(YAZI_VURGU < YAZI_BASLIK);
+        assert!(KOSE_KUCUK < KOSE_ORTA);
+        assert!(KOSE_ORTA < KOSE_BUYUK);
+        assert!(HAREKET_HIZLI < HAREKET_ORTA);
+        assert!(HAREKET_ORTA < HAREKET_YAVAS);
+    }
+}

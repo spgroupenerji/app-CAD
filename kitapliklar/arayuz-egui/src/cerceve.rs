@@ -279,7 +279,7 @@ pub fn layout_tabs(app: &mut CadApp, ui: &mut egui::Ui) {
 /// the right.
 pub fn status_bar(app: &mut CadApp, ui: &mut egui::Ui) {
     let t = Tokens::get();
-    egui::Panel::bottom("cc_status").exact_size(26.0).frame(egui::Frame::NONE.fill(t.chrome)).show(ui, |ui| {
+    egui::Panel::bottom("cc_status").exact_size(28.0).frame(egui::Frame::NONE.fill(t.chrome)).show(ui, |ui| {
         let r = ui.max_rect();
         let p = ui.painter().clone();
         // Clear the status message on time even when no input arrives (the app only repaints on input).
@@ -309,7 +309,7 @@ pub fn status_bar(app: &mut CadApp, ui: &mut egui::Ui) {
             (ArayuzIkonu::Workspace, false, "ui.noop", "Workspace Switching"),
             (ArayuzIkonu::Settings, false, "ui.dialog.dsettings", "Drafting Settings"),
         ];
-        let size = 20.0;
+        let size = 22.0;
         let mut rx = r.right() - 8.0 - toggles.len() as f32 * (size + 4.0);
         // Coordinates.
         let coord = app.canvas.cursor.map(|c| {
@@ -347,7 +347,7 @@ pub fn status_bar(app: &mut CadApp, ui: &mut egui::Ui) {
         if let Some(text) = readout {
             let width = (coord_right - r.left() - 16.0).clamp(120.0, 230.0);
             let box_rect = Rect::from_min_max(pos2(r.left() + 6.0, r.top() + 3.0), pos2(r.left() + 6.0 + width, r.bottom() - 3.0));
-            p.rect_filled(box_rect, 2.0, t.chrome_dark);
+            p.rect_filled(box_rect, 4.0, t.chrome_dark);
             p.rect_stroke(box_rect, 2.0, Stroke::new(1.0, t.border), egui::StrokeKind::Inside);
             let color = if message.is_some() { t.warn } else { t.text };
             let mut job = egui::text::LayoutJob::simple_singleline(text.clone(), crate::tema::mono(), color);
@@ -365,7 +365,7 @@ pub fn status_bar(app: &mut CadApp, ui: &mut egui::Ui) {
             let br = Rect::from_min_size(pos2(rx, r.center().y - size / 2.0), vec2(size, size));
             let resp = ui.interact(br, ui.id().with(("tg", tip)), Sense::click());
             if on {
-                p.rect_filled(br, 3.0, t.toggle_on.gamma_multiply(0.35));
+                p.rect_filled(br, 4.0, t.toggle_on.gamma_multiply(0.30));
             } else if resp.hovered() {
                 p.rect_filled(br, 3.0, t.control_hover.gamma_multiply(0.5));
             }
