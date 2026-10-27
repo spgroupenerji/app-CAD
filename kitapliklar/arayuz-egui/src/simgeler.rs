@@ -384,7 +384,8 @@ pub fn paint(p: &Painter, rect: Rect, icon: Icon, dim: bool) {
         return;
     }
     let alpha = |c: Color32| if dim { c.gamma_multiply(0.4) } else { c };
-    let pen = Pen { p, r: rect, w: (rect.width() / 16.0).clamp(1.0, 1.6), base: alpha(t.icon), acc: alpha(t.icon_accent), pt: alpha(t.icon_point) };
+    // 24'lük ızgarada hedef 1,5 px: 20 px ikonda ~1,43, 16 px'te ~1,14; 1,6 üst sınırı.
+    let pen = Pen { p, r: rect, w: (rect.width() / 14.0).clamp(1.1, 1.6), base: alpha(t.icon), acc: alpha(t.icon_accent), pt: alpha(t.icon_point) };
     let (b, a) = (pen.base, pen.acc);
     use Icon::*;
     match icon {

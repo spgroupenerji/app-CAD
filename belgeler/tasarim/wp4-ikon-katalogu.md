@@ -52,3 +52,8 @@
 - Wipeout: 3–16 → **2–18**.
 - Table: 3–21 → **2–22**; satır çizgileri 7/12/17.
 - Katalog: [ikon-katalogu.png](gorseller/wp4/ikon-katalogu.png).
+## Stroke normalizasyonu (P4)
+
+- Kalınlık formülü `genişlik/16 clamp(1,0–1,6)` → `genişlik/14 clamp(1,1–1,6)`:
+  20 px ikonda ~**1,43 px**, 16 px'te ~1,14 px; shadcn/Lucide 1,5 px hedefine yaklaştı.
+- Katalog yenilendi: [ikon-katalogu.png](gorseller/wp4/ikon-katalogu.png).
