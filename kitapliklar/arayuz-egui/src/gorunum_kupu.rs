@@ -12,7 +12,7 @@
 
 #![allow(clippy::disallowed_methods)]
 
-use egui::{Color32, CursorIcon, Pos2, Rect, Sense, Stroke, pos2, vec2};
+use egui::{CursorIcon, Pos2, Rect, Sense, Stroke, pos2, vec2};
 use serde_json::json;
 
 use crate::CadApp;

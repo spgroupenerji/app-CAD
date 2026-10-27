@@ -212,9 +212,11 @@ pub fn fontlari_ekle(fonts: &mut FontDefinitions) {
     for font in iconflow::fonts() {
         let ad = font.family.to_string();
         fonts.font_data.insert(ad.clone(), std::sync::Arc::new(FontData::from_static(font.bytes)));
+        // Özel kullanım alanı (PUA) codepoint'leri sistem fontlarında da bulunabildiğinden
+        // (Segoe UI Symbol gibi) ikon fontu listede ÖNE alınır; aksi hâlde yanlış glyph çizilir.
         for family in [FontFamily::Proportional, FontFamily::Monospace] {
             if let Some(liste) = fonts.families.get_mut(&family) {
-                liste.push(ad.clone());
+                liste.insert(0, ad.clone());
             }
         }
     }

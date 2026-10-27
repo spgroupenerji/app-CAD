@@ -874,7 +874,7 @@ fn ciz_buyuk_etiketli(ui: &mut egui::Ui, p: &egui::Painter, t: &Tokens, b: &Dugm
         p.rect_filled(br, 3.0, t.control_hover.gamma_multiply(0.75));
     }
     let en = var(b.id);
-    simgeler::paint(p, Rect::from_center_size(pos2(br.center().x, br.top() + 21.0), vec2(28.0, 28.0)), b.icon, !en);
+    // İkon + etiket tek bir blok gibi dikey ortalanır; ikon boyu kompakt gövdede küçülür.
     let mut job = egui::text::LayoutJob::simple(
         crate::i18n::t(b.label).to_string(),
         tema::serit_etiket(boyut),
@@ -884,7 +884,13 @@ fn ciz_buyuk_etiketli(ui: &mut egui::Ui, p: &egui::Painter, t: &Tokens, b: &Dugm
     job.wrap.max_rows = 2;
     job.halign = egui::Align::Center;
     let g = p.layout_job(job);
-    p.galley(pos2(br.center().x - g.size().x / 2.0, br.bottom() - 4.0 - g.size().y), g, t.text_dim);
+    let ikon_boy = if br.height() < 70.0 { 24.0 } else { 28.0 };
+    let bosluk = 4.0;
+    let toplam = ikon_boy + bosluk + g.size().y;
+    let ust = br.center().y - toplam / 2.0;
+    let ikon = Rect::from_center_size(pos2(br.center().x, ust + ikon_boy / 2.0), vec2(ikon_boy, ikon_boy));
+    simgeler::paint(p, ikon, b.icon, !en);
+    p.galley(pos2(br.center().x - g.size().x / 2.0, ust + ikon_boy + bosluk), g, t.text_dim);
     simgeler::describe_control(ui, &resp, b.label, None, false);
     let resp = resp.on_hover_text(crate::i18n::t(b.label));
     resp.dnd_set_drag_payload(crate::paletler::raf::RafAraci(b.id.to_string()));
