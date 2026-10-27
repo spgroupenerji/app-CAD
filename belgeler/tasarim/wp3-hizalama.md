@@ -30,3 +30,11 @@ kompakt gövdede ikon 28 → 24 px. Etiket galley'i düğme merkezine göre yata
 
 - 207 lib testi + katalog testi yeşil; clippy 0 uyarı; rustfmt temiz.
 - `cargo build -p spcad` (debug) başarılı; `cargo build --release -p spcad` arka planda çalıştırıldı.
+## Ek düzeltme — galley halign koordinatı
+
+`LayoutJob` `halign = Center` ile üretilen galley'de `rect.center().x == 0` olur; metin konumu
+`br.center - rect.center` ile verilmelidir. Önceki `br.center - g.size().x/2` formülü etiketi
+galley genişliğinin yarısı kadar **sola** kaydırıyordu. Düzeltildi; şerit testleri (11) yeşil.
+
+Kanıt: [final-draw-kirp.png](gorseller/wp4/final-draw-kirp.png) — Line/Polyline/Circle/Arc ve
+Move/Copy/Rotate/Trim etiketleri ikonlarla hizalı.

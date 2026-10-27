@@ -890,7 +890,8 @@ fn ciz_buyuk_etiketli(ui: &mut egui::Ui, p: &egui::Painter, t: &Tokens, b: &Dugm
     let ust = br.center().y - toplam / 2.0;
     let ikon = Rect::from_center_size(pos2(br.center().x, ust + ikon_boy / 2.0), vec2(ikon_boy, ikon_boy));
     simgeler::paint(p, ikon, b.icon, !en);
-    p.galley(pos2(br.center().x - g.size().x / 2.0, ust + ikon_boy + bosluk), g, t.text_dim);
+    // halign = Center galley'de rect.center().x == 0; metni rect'in merkezine göre yerleştir.
+    p.galley(pos2(br.center().x - g.rect.center().x, ust + ikon_boy + bosluk), g, t.text_dim);
     simgeler::describe_control(ui, &resp, b.label, None, false);
     let resp = resp.on_hover_text(crate::i18n::t(b.label));
     resp.dnd_set_drag_payload(crate::paletler::raf::RafAraci(b.id.to_string()));
