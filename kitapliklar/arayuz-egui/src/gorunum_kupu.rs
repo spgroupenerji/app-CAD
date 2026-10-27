@@ -10,6 +10,8 @@
 //! twist, no 3D view direction and no user coordinate system yet, so the compass ring explains
 //! that instead of rotating, and the WCS menu lists the only coordinate system there is.
 
+#![allow(clippy::disallowed_methods)]
+
 use egui::{Color32, CursorIcon, Pos2, Rect, Sense, Stroke, pos2, vec2};
 use serde_json::json;
 

@@ -37,6 +37,7 @@ pub mod gorunum_olcegi;
 pub mod gpu;
 pub mod hizli;
 pub mod i18n;
+pub mod ikonlar;
 pub mod katmanlar;
 pub mod kisayol_menuleri;
 pub mod menuler;

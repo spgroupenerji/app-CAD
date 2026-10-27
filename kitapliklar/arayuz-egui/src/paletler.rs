@@ -1,5 +1,7 @@
 //! The tool shelf and the Layers / Properties palettes.
 
+#![allow(clippy::disallowed_methods)]
+
 use egui::{Color32, Rect, Sense, Stroke, pos2, vec2};
 use serde_json::{Value, json};
 use spcad_color::{Color, Rgb};

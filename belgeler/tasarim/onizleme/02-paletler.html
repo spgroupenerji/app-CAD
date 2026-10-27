@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><title>WP0 — Çizim ekranı</title><link rel="stylesheet" href="tasarim.css"></head>
+<body>
+<script src="sprite.js"></script>
+<div class="app">
+  <header class="menubar">
+    <div class="brand"><span class="logo"></span>SP-GROUP CAD <span class="badge">beta</span></div>
+    <nav class="menus">
+      <span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Format</span><span>Tools</span>
+      <span>Draw</span><span>Dimension</span><span>Modify</span><span>Window</span><span>Help</span>
+    </nav>
+    <div class="menubar-right"><svg class="ic sm"><use href="#i-search"/></svg><span>Search commands</span><span class="kbd">Ctrl K</span></div>
+  </header>
+
+  <section class="ribbon">
+    <div class="rtabs">
+      <button class="rtab active">Home</button><button class="rtab">Insert</button><button class="rtab">Annotate</button>
+      <button class="rtab">Parametric</button><button class="rtab">View</button><button class="rtab">Manage</button><button class="rtab">Output</button>
+      <span class="spacer"></span>
+      <span class="tiny">Workspace · Drafting &amp; Annotation</span>
+    </div>
+    <div class="rbody">
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn on"><svg class="ic lg"><use href="#i-line"/></svg><span>Line</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-pline"/></svg><span>Polyline</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-circle"/></svg><span>Circle</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-arc"/></svg><span>Arc</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-rect"/></svg>Rectangle</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-hatch"/></svg>Hatch</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-text"/></svg>Text</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-dim"/></svg>Dimension</button>
+          </div>
+        </div>
+        <div class="rgroup-label">Draw</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-move"/></svg><span>Move</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-copy"/></svg><span>Copy</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-rotate"/></svg><span>Rotate</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-trim"/></svg><span>Trim</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-mirror"/></svg>Mirror</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-offset"/></svg>Offset</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-trim"/></svg>Fillet</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-minus"/></svg>Erase</button>
+          </div>
+        </div>
+        <div class="rgroup-label">Modify</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-text"/></svg><span>MText</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-dim"/></svg><span>Dimension</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-measure"/></svg>MLeader</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-text"/></svg>Table</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-dim"/></svg>Style</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-hatch"/></svg>Revision</button>
+          </div>
+        </div>
+        <div class="rgroup-label">Annotation</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-layers"/></svg><span>Layer Props</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-layers"/></svg>Make Current</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-freeze"/></svg>Freeze</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-lock"/></svg>Lock</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-eye"/></svg>Off</button>
+          </div>
+        </div>
+        <div class="rgroup-label">Layers</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-block"/></svg><span>Create</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-insert"/></svg><span>Insert</span></button>
+        </div>
+        <div class="rgroup-label">Block</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-props"/></svg><span>Properties</span></button>
+          <div class="rctl"><div class="select" style="width:104px">ByLayer</div></div>
+        </div>
+        <div class="rgroup-label">Properties</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-zoom"/></svg><span>Zoom</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-pan"/></svg><span>Pan</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-zoom"/></svg>Window</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-zoom"/></svg>Extents</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-zoom"/></svg>Previous</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-zoom"/></svg>Realtime</button>
+          </div>
+        </div>
+        <div class="rgroup-label">View</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="doctabs">
+    <button class="doctab">Start</button>
+    <button class="doctab">Drawing1</button>
+    <button class="doctab active">apartment.dxf <span class="x">×</span></button>
+    <button class="doctab add">+</button>
+    <div class="right"><span>Top</span><span>·</span><span>2D Wireframe</span></div>
+  </div>
+
+  <div class="main">
+    <div class="rail">
+      <button class="railbtn on"><svg class="ic"><use href="#i-line"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-pline"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-circle"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-arc"/></svg></button>
+      <div class="grp"></div>
+      <button class="railbtn"><svg class="ic"><use href="#i-move"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-copy"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-rotate"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-trim"/></svg></button>
+      <div class="grp"></div>
+      <button class="railbtn"><svg class="ic"><use href="#i-hatch"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-text"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-dim"/></svg></button>
+      <div style="flex:1"></div>
+      <button class="railbtn"><svg class="ic"><use href="#i-layers"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-search"/></svg></button>
+      <button class="railbtn"><svg class="ic"><use href="#i-gear"/></svg></button>
+    </div>
+
+    <div class="canvas">
+      <svg class="plan" viewBox="0 0 1010 640" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#CBD5E1" fill="none" stroke-width="7" stroke-linecap="square" opacity=".92">
+          <path d="M90 70H920V540H90Z"/>
+          <path d="M520 70V540"/>
+          <path d="M520 300H920"/>
+        </g>
+        <g fill="#07090C">
+          <rect x="380" y="530" width="60" height="20"/>
+          <rect x="510" y="360" width="20" height="60"/>
+          <rect x="650" y="290" width="60" height="20"/>
+        </g>
+        <g stroke="#3E9E5C" fill="none" stroke-width="2.5" opacity=".95">
+          <path d="M380 540v-60"/><path d="M380 480a60 60 0 0 1 60 60"/>
+          <path d="M520 360h60"/><path d="M580 360a60 60 0 0 1-60 60"/>
+          <path d="M650 300v60"/><path d="M650 360a60 60 0 0 0 60-60"/>
+        </g>
+        <g stroke="#4C8DFF" stroke-width="4.5" opacity=".85">
+          <path d="M180 70h140"/><path d="M920 180v100"/><path d="M720 540h120"/>
+        </g>
+        <g stroke="#B7C2D0" fill="none" stroke-width="2" opacity=".85">
+          <rect x="300" y="370" width="150" height="92" rx="4"/>
+          <circle cx="330" cy="352" r="12"/><circle cx="390" cy="352" r="12"/>
+          <circle cx="330" cy="480" r="12"/><circle cx="390" cy="480" r="12"/>
+          <circle cx="282" cy="416" r="12"/><circle cx="468" cy="416" r="12"/>
+          <rect x="620" y="430" width="160" height="56" rx="10"/>
+          <path d="M620 452h160"/>
+          <rect x="690" y="330" width="120" height="150" rx="4"/>
+          <rect x="700" y="340" width="46" height="28" rx="3"/><rect x="754" y="340" width="46" height="28" rx="3"/>
+          <path d="M690 400h120"/>
+          <rect x="120" y="88" width="190" height="52" rx="4"/>
+          <circle cx="160" cy="114" r="10"/>
+          <rect x="760" y="84" width="100" height="52" rx="8"/>
+          <ellipse cx="745" cy="172" rx="15" ry="19"/>
+          <circle cx="800" cy="160" r="12"/>
+        </g>
+        <g fill="#E7D06A" font-weight="600" font-family="Segoe UI, sans-serif">
+          <text x="330" y="300" font-size="19" text-anchor="middle" letter-spacing=".06em">LIVING / DINING</text>
+          <text x="330" y="322" font-size="11" text-anchor="middle" opacity=".8">34.6 m²</text>
+          <text x="742" y="250" font-size="16" text-anchor="middle" letter-spacing=".06em">BATH</text>
+          <text x="742" y="268" font-size="10" text-anchor="middle" opacity=".8">7.7 m²</text>
+          <text x="605" y="350" font-size="16" text-anchor="middle" letter-spacing=".06em">BEDROOM</text>
+          <text x="605" y="368" font-size="10" text-anchor="middle" opacity=".8">16.4 m²</text>
+        </g>
+        <g stroke="#6FB7CC" fill="#6FB7CC" stroke-width="1.1" font-family="Consolas, monospace" font-size="10" opacity=".9">
+          <path d="M90 580H920" fill="none"/><path d="M90 610H920" fill="none"/>
+          <path d="M90 574v12M520 574v12M920 574v12M90 604v12M920 604v12" fill="none"/>
+          <path d="M90 540v70M520 540v70M920 540v70" fill="none" opacity=".35"/>
+          <text x="305" y="572" text-anchor="middle" stroke="none">7000</text>
+          <text x="720" y="572" text-anchor="middle" stroke="none">5000</text>
+          <text x="505" y="602" text-anchor="middle" stroke="none" font-weight="600">12000</text>
+          <path d="M60 70v470" fill="none"/><path d="M54 70h12M54 540h12" fill="none"/>
+          <text x="48" y="305" text-anchor="middle" stroke="none" transform="rotate(-90 48 305)">8000</text>
+          <path d="M955 70v470" fill="none"/><path d="M949 70h12M949 540h12" fill="none"/>
+          <text x="972" y="305" text-anchor="middle" stroke="none" transform="rotate(90 972 305)">5000</text>
+        </g>
+      </svg>
+      <div class="viewcube">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="66" r="45" fill="rgba(16,21,28,.55)" stroke="#26303B"/>
+          <g transform="translate(60 66)">
+            <path d="M0-30 30-14 0 2-30-14Z" fill="#232D39" stroke="#3B4A5A"/>
+            <path d="M-30-14 0 2v30l-30-16Z" fill="#161D26" stroke="#3B4A5A"/>
+            <path d="M30-14 0 2v30l30-16Z" fill="#1B222C" stroke="#3B4A5A"/>
+            <text x="0" y="-11" text-anchor="middle" font-size="7.5" fill="#B9C4D2" letter-spacing="1">TOP</text>
+            <text x="-16" y="12" text-anchor="middle" font-size="6.5" fill="#9AA6B3" letter-spacing=".6" transform="rotate(-38 -16 12)">FRONT</text>
+            <text x="16" y="12" text-anchor="middle" font-size="6.5" fill="#9AA6B3" letter-spacing=".6" transform="rotate(38 16 12)">RIGHT</text>
+          </g>
+          <text x="60" y="14" text-anchor="middle" font-size="8" fill="#7C8896" letter-spacing="3">N</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="dock">
+      <section class="panel" style="flex:none">
+        <div class="panel head"><h3>Layers</h3><div class="hactions"><button class="iconbtn"><svg class="ic sm"><use href="#i-plus"/></svg></button><button class="iconbtn"><svg class="ic sm"><use href="#i-more"/></svg></button></div></div>
+        <div class="panel tools"><div class="select" style="flex:1">All layers</div><button class="iconbtn"><svg class="ic sm"><use href="#i-search"/></svg></button><button class="iconbtn"><svg class="ic sm"><use href="#i-gear"/></svg></button></div>
+        <div class="lrows">
+          <div class="lrow cur"><span class="swatch" style="background:#E6EBF2"></span><span class="name">Duvarlar</span><span class="count">48</span><span class="tog"><svg class="ic sm on"><use href="#i-eye"/></svg><svg class="ic sm"><use href="#i-freeze"/></svg><svg class="ic sm"><use href="#i-lock"/></svg></span></div>
+          <div class="lrow"><span class="swatch" style="background:#4C8DFF"></span><span class="name">Pencereler</span><span class="count">16</span><span class="tog"><svg class="ic sm on"><use href="#i-eye"/></svg><svg class="ic sm"><use href="#i-freeze"/></svg><svg class="ic sm"><use href="#i-lock"/></svg></span></div>
+          <div class="lrow"><span class="swatch" style="background:#3E9E5C"></span><span class="name">Kapılar</span><span class="count">12</span><span class="tog"><svg class="ic sm on"><use href="#i-eye"/></svg><svg class="ic sm"><use href="#i-freeze"/></svg><svg class="ic sm"><use href="#i-lock"/></svg></span></div>
+          <div class="lrow"><span class="swatch" style="background:#C9A227"></span><span class="name">Mobilya</span><span class="count">64</span><span class="tog"><svg class="ic sm on"><use href="#i-eye"/></svg><svg class="ic sm"><use href="#i-freeze"/></svg><svg class="ic sm"><use href="#i-lock"/></svg></span></div>
+          <div class="lrow"><span class="swatch" style="background:#6FB7CC"></span><span class="name">Ölçüler</span><span class="count">22</span><span class="tog"><svg class="ic sm on"><use href="#i-eye"/></svg><svg class="ic sm"><use href="#i-freeze"/></svg><svg class="ic sm on"><use href="#i-lock"/></svg></span></div>
+          <div class="lrow"><span class="swatch" style="background:#E7D06A"></span><span class="name">Metin</span><span class="count">18</span><span class="tog"><svg class="ic sm on"><use href="#i-eye"/></svg><svg class="ic sm"><use href="#i-freeze"/></svg><svg class="ic sm"><use href="#i-lock"/></svg></span></div>
+          <div class="lrow"><span class="swatch" style="background:#8A93A0"></span><span class="name">Tarama</span><span class="count">8</span><span class="tog"><svg class="ic sm"><use href="#i-eye"/></svg><svg class="ic sm"><use href="#i-freeze"/></svg><svg class="ic sm"><use href="#i-lock"/></svg></span></div>
+          <div class="lrow"><span class="swatch" style="background:#B08968"></span><span class="name">XREF · Zemin</span><span class="count">240</span><span class="tog"><svg class="ic sm on"><use href="#i-eye"/></svg><svg class="ic sm on"><use href="#i-freeze"/></svg><svg class="ic sm"><use href="#i-lock"/></svg></span></div>
+        </div>
+      </section>
+      <section class="panel props">
+        <div class="panel head"><h3>Properties</h3><div class="hactions"><button class="iconbtn"><svg class="ic sm"><use href="#i-search"/></svg></button><button class="iconbtn"><svg class="ic sm"><use href="#i-more"/></svg></button></div></div>
+        <div class="pgroup"><div class="prow"><div class="select" style="flex:1">Line (1)</div><button class="iconbtn"><svg class="ic sm"><use href="#i-minus"/></svg></button></div></div>
+        <div class="pgroup"><h4>General</h4>
+          <div class="prow"><span class="k">Layer</span><span class="v">Duvarlar</span></div>
+          <div class="prow"><span class="k">Color</span><span class="v">ByLayer</span><span class="swatch" style="background:#E6EBF2"></span></div>
+          <div class="prow"><span class="k">Linetype</span><span class="v">Continuous</span></div>
+          <div class="prow"><span class="k">Lineweight</span><span class="v">ByLayer</span></div>
+          <div class="prow"><span class="k">Transparency</span><span class="v">ByLayer</span></div>
+        </div>
+        <div class="pgroup"><h4>Geometry</h4>
+          <div class="prow"><span class="k">Start X</span><span class="v mono">12480.00</span></div>
+          <div class="prow"><span class="k">Start Y</span><span class="v mono">8120.00</span></div>
+          <div class="prow"><span class="k">End X</span><span class="v mono">18240.00</span></div>
+          <div class="prow"><span class="k">End Y</span><span class="v mono">8120.00</span></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="cmddeck">
+    <div class="cmdhist"><span><b>LINE</b> — Specify first point:</span><span style="margin-left:auto">Command history</span></div>
+    <div class="cmdrow">
+      <span class="prompt">›</span>
+      <div class="cmdinput"><span>LINE</span><span class="caret"></span><span class="ghost">Specify first point</span></div>
+      <div class="kw"><span>Undo</span><span>Close</span></div>
+      <button class="cmdmore"><svg class="ic sm"><use href="#i-chev"/></svg></button>
+    </div>
+  </div>
+
+  <div class="statusbar">
+    <span class="coords">9198.0505, 871.1360, 0.0000</span>
+    <div class="seg"><span class="chip on">GRID</span><span class="chip">SNAP</span><span class="chip">ORTHO</span><span class="chip on">POLAR</span><span class="chip on">OSNAP</span><span class="chip on">DYN</span></div>
+    <div class="seg"><span class="chip">1:1</span><span class="chip">Model</span></div>
+    <div class="right">
+      <span class="chip">Layout1</span><span class="chip">Layout2</span>
+      <svg class="ic"><use href="#i-grid"/></svg><svg class="ic"><use href="#i-ortho"/></svg><svg class="ic"><use href="#i-snap"/></svg><svg class="ic"><use href="#i-polar"/></svg>
+      <svg class="ic"><use href="#i-zoom"/></svg><svg class="ic"><use href="#i-gear"/></svg>
+    </div>
+  </div>
+</div>
+
+<style>
+.float.quick{position:fixed;left:388px;top:200px;width:406px}
+.float.tools{position:fixed;left:62px;top:212px;width:272px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.pbtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:58px;border-radius:6px;
+  color:var(--text2);font-size:10px;text-align:center}
+.pbtn:hover{background:var(--accent-soft);color:var(--text)}
+.pbtn .ic{width:20px;height:20px}
+.ac{position:fixed;left:54px;bottom:104px;width:446px;background:var(--popover);border:1px solid var(--hairline2);
+  border-radius:8px;box-shadow:var(--shadow-pop);padding:6px;z-index:26}
+.ac .row{display:flex;align-items:center;gap:10px;height:28px;padding:0 10px;border-radius:5px;font-family:var(--mono);
+  font-size:11.5px;color:var(--text2)}
+.ac .row.on{background:var(--accent-soft);color:var(--text);box-shadow:0 0 0 1px var(--accent-line) inset}
+.ac .row .sc{margin-left:auto;color:var(--text3);font-size:10px}
+.ac .foot{display:flex;gap:14px;padding:7px 10px 3px;border-top:1px solid var(--hairline);margin-top:4px;
+  font-size:10px;color:var(--text3)}
+.ctx{position:fixed;right:320px;top:352px;width:196px;background:var(--popover);border:1px solid var(--hairline2);
+  border-radius:8px;box-shadow:var(--shadow-pop);padding:5px;z-index:24}
+.ctx .r{height:26px;display:flex;align-items:center;gap:8px;padding:0 9px;border-radius:5px;font-size:11.5px;color:var(--text2)}
+.ctx .r:hover{background:var(--accent-soft);color:var(--text)}
+.ctx .sep{height:1px;background:var(--hairline);margin:4px 6px}
+</style>
+
+<div class="float quick">
+  <div class="fhead"><svg class="ic sm"><use href="#i-cmd"/></svg> QuickCalc <button class="iconbtn"><svg class="ic sm"><use href="#i-close"/></svg></button></div>
+  <div class="fbody">
+    <div class="sect"><div class="sh">Expression</div>
+      <div class="fldrow"><div class="field" style="flex:1;font-family:var(--mono)">2*3.14159*R500</div><button class="btn ghost" style="width:28px;padding:0">=</button></div>
+      <div class="fldrow"><button class="btn secondary" style="flex:1">Clear</button><button class="btn secondary" style="flex:1">Paste to command line</button></div>
+    </div>
+    <div class="sect"><div class="sh">Get from the drawing</div>
+      <div class="segctl"><button>Point</button><button>Distance</button><button>Angle</button><button>Intersection</button></div>
+    </div>
+    <div class="sect"><div class="sh">History</div>
+      <div class="quote">R = 500  →  2πR = 3141.5927<br>5640 / 2  =  2820.0000</div>
+    </div>
+    <div class="sect"><div class="sh">Units conversion</div>
+      <div class="fldrow"><span class="lab">Type</span><div class="select" style="flex:1">Length</div></div>
+      <div class="fldrow"><span class="lab">From</span><div class="select" style="flex:1">mm</div></div>
+      <div class="fldrow"><span class="lab">To</span><div class="select" style="flex:1">in</div></div>
+      <div class="fldrow"><span class="lab">Value</span><div class="field" style="flex:1;font-family:var(--mono)">1</div></div>
+      <div class="fldrow"><span style="flex:1"></span><button class="btn secondary">Convert</button></div>
+    </div>
+    <div class="sect"><div class="sh">Variables</div>
+      <div class="fldrow"><div class="field" style="flex:1">Name</div><span class="hint">=</span><div class="field" style="flex:1">Expression</div><button class="btn secondary">Add</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="float tools">
+  <div class="fhead"><svg class="ic sm"><use href="#i-props"/></svg> Tool Palette <button class="iconbtn"><svg class="ic sm"><use href="#i-close"/></svg></button></div>
+  <div class="fbody" style="gap:9px">
+    <div class="segctl"><button class="on">Draw</button><button>Modify</button><button>Annotate</button></div>
+    <div class="grid3">
+      <button class="pbtn"><svg class="ic"><use href="#i-line"/></svg>Line</button>
+      <button class="pbtn"><svg class="ic"><use href="#i-pline"/></svg>Polyline</button>
+      <button class="pbtn"><svg class="ic"><use href="#i-circle"/></svg>Circle</button>
+      <button class="pbtn"><svg class="ic"><use href="#i-arc"/></svg>Arc</button>
+      <button class="pbtn"><svg class="ic"><use href="#i-rect"/></svg>Rectangle</button>
+      <button class="pbtn"><svg class="ic"><use href="#i-hatch"/></svg>Hatch</button>
+      <button class="pbtn"><svg class="ic"><use href="#i-text"/></svg>Text</button>
+      <button class="pbtn"><svg class="ic"><use href="#i-dim"/></svg>Dimension</button>
+      <button class="pbtn"><svg class="ic"><use href="#i-block"/></svg>Block</button>
+    </div>
+    <div class="hint">Drag a tool into the drawing. Right-click for options.</div>
+  </div>
+</div>
+
+<div class="ac">
+  <div class="row on"><span>LINE</span><span class="sc">L</span></div>
+  <div class="row"><span>PLINE</span><span class="sc">PL</span></div>
+  <div class="row"><span>LENGTHEN</span><span class="sc">LEN</span></div>
+  <div class="row"><span>LAYER</span><span class="sc">LA</span></div>
+  <div class="foot"><span>Tab to complete</span><span>Enter to run</span><span>Esc to dismiss</span></div>
+</div>
+
+<div class="ctx">
+  <div class="r">Set Current</div>
+  <div class="r">New Layer</div>
+  <div class="r">Rename Layer</div>
+  <div class="r">Layer States…</div>
+  <div class="sep"></div>
+  <div class="r">Freeze in All Viewports</div>
+  <div class="r">Isolate</div>
+  <div class="r">Delete</div>
+</div>
+
+</body></html>

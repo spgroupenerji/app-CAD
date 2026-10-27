@@ -3,6 +3,8 @@
 //! VP Color columns. Every change runs an engine command (`layer.*`, `layerstate.*`, `vplayer`,
 //! `linetype`).
 
+#![allow(clippy::disallowed_methods)]
+
 use egui::{Color32, Rect, RichText, Sense, Stroke, pos2, vec2};
 use serde_json::{Value, json};
 use spcad_color::{Color, Rgb, aci_rgb};

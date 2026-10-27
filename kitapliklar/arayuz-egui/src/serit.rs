@@ -6,6 +6,8 @@
 //! large buttons, icon-only small columns, title-only) and the spare width is handed to the panels
 //! with the most content still hidden, so no group disappears behind an overflow menu.
 
+#![allow(clippy::disallowed_methods)]
+
 use egui::{Align2, FontId, Rect, Sense, Stroke, pos2, vec2};
 use serde_json::json;
 

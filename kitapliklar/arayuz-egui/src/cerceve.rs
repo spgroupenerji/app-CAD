@@ -4,6 +4,7 @@ use egui::{Rect, Sense, Stroke, pos2, vec2};
 use serde_json::json;
 
 use crate::CadApp;
+use crate::ikonlar::ArayuzIkonu;
 use crate::simgeler::{self, Icon};
 use crate::tema::Tokens;
 
@@ -292,21 +293,21 @@ pub fn status_bar(app: &mut CadApp, ui: &mut egui::Ui) {
         let s = app.session.settings.clone();
         let anno_all = app.session.doc().is_ok_and(|d| d.anno_all_visible());
         use spcad_engine::yakalama::mode;
-        let toggles: Vec<(Icon, bool, &str, &str)> = vec![
-            (Icon::Grid, s.gridmode, "grid", "Grid (F7)"),
-            (Icon::Snap, s.snapmode, "snap", "Snap Mode (F9)"),
-            (Icon::Ortho, s.orthomode, "ortho", "Ortho Mode (F8)"),
-            (Icon::Polar, s.polarmode, "polar", "Polar Tracking (F10)"),
-            (Icon::Isodraft, s.isodraft, "isodraft", "Isometric Drafting"),
-            (Icon::OTrack, s.otrack, "otrack", "Object Snap Tracking (F11)"),
-            (Icon::Osnap, s.osmode & mode::OFF == 0 && s.osmode != 0, "osnap", "Object Snap (F3)"),
-            (Icon::Lineweight, s.lwdisplay, "lwdisplay", "Show/Hide Lineweight"),
-            (Icon::Transparency, s.transparency_display, "transparencydisplay", "Show/Hide Transparency"),
-            (Icon::DynInput, s.dynmode, "dynmode", "Dynamic Input (F12)"),
-            (Icon::QuickProps, s.qpmode, "qpmode", "Quick Properties"),
-            (Icon::Annotation, anno_all, "annovisible.toggle", "Annotation Visibility"),
-            (Icon::Workspace, false, "ui.noop", "Workspace Switching"),
-            (Icon::Gear, false, "ui.dialog.dsettings", "Drafting Settings"),
+        let toggles: Vec<(ArayuzIkonu, bool, &str, &str)> = vec![
+            (ArayuzIkonu::Grid, s.gridmode, "grid", "Grid (F7)"),
+            (ArayuzIkonu::Snap, s.snapmode, "snap", "Snap Mode (F9)"),
+            (ArayuzIkonu::Ortho, s.orthomode, "ortho", "Ortho Mode (F8)"),
+            (ArayuzIkonu::Polar, s.polarmode, "polar", "Polar Tracking (F10)"),
+            (ArayuzIkonu::Isodraft, s.isodraft, "isodraft", "Isometric Drafting"),
+            (ArayuzIkonu::Track, s.otrack, "otrack", "Object Snap Tracking (F11)"),
+            (ArayuzIkonu::Osnap, s.osmode & mode::OFF == 0 && s.osmode != 0, "osnap", "Object Snap (F3)"),
+            (ArayuzIkonu::Lineweight, s.lwdisplay, "lwdisplay", "Show/Hide Lineweight"),
+            (ArayuzIkonu::Transparency, s.transparency_display, "transparencydisplay", "Show/Hide Transparency"),
+            (ArayuzIkonu::DynInput, s.dynmode, "dynmode", "Dynamic Input (F12)"),
+            (ArayuzIkonu::QuickProps, s.qpmode, "qpmode", "Quick Properties"),
+            (ArayuzIkonu::Annotation, anno_all, "annovisible.toggle", "Annotation Visibility"),
+            (ArayuzIkonu::Workspace, false, "ui.noop", "Workspace Switching"),
+            (ArayuzIkonu::Settings, false, "ui.dialog.dsettings", "Drafting Settings"),
         ];
         let size = 20.0;
         let mut rx = r.right() - 8.0 - toggles.len() as f32 * (size + 4.0);
@@ -368,7 +369,14 @@ pub fn status_bar(app: &mut CadApp, ui: &mut egui::Ui) {
             } else if resp.hovered() {
                 p.rect_filled(br, 3.0, t.control_hover.gamma_multiply(0.5));
             }
-            simgeler::paint(&p, br.shrink(2.5), icon, false);
+            let renk = if on {
+                t.toggle_on
+            } else if resp.hovered() {
+                t.text
+            } else {
+                t.text_dim
+            };
+            crate::ikonlar::ciz(&p, br.center(), icon, size - 4.0, renk);
             if on {
                 // Re-tint the icon blue-ish by an underline.
                 p.hline(br.x_range().shrink(4.0), br.bottom() - 1.0, Stroke::new(1.5, t.toggle_on));

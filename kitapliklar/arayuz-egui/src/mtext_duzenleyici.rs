@@ -4,6 +4,8 @@
 //! and tab stops. The text and its formats live in the engine's
 //! [`spcad_engine::mtext_duzenle::Formatted`]; this file only draws and forwards edits.
 
+#![allow(clippy::disallowed_methods)]
+
 use std::sync::Arc;
 
 use egui::text::{CCursor, CCursorRange, LayoutJob};

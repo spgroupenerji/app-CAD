@@ -1,0 +1,218 @@
+//! Genel arayüz ikonları: Lucide seti (iconflow) üzerinden tek kaynak.
+//!
+//! CAD komut ikonları \`simgeler\` modülünde kalır; burası menü, şerit, palet başlığı,
+//! durum çubuğu ve diyalogların ortak simgeleridir. Fontlar \`tema::install_fonts\`
+//! içinde ilk kareden önce yüklenir; glyph'ler özel kullanım alanındadır.
+
+use std::collections::HashMap;
+use std::sync::OnceLock;
+
+use egui::{Color32, FontData, FontDefinitions, FontFamily, FontId, Painter, Pos2};
+
+/// Arayüzde kullanılan Lucide ikonları.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub enum ArayuzIkonu {
+    Grid,
+    Snap,
+    Ortho,
+    Polar,
+    Isodraft,
+    Track,
+    Osnap,
+    Lineweight,
+    Transparency,
+    DynInput,
+    QuickProps,
+    Annotation,
+    Workspace,
+    Settings,
+    Search,
+    Layers,
+    PanelLeft,
+    Close,
+    Check,
+    ChevronDown,
+    Plus,
+    Minus,
+    File,
+    FolderOpen,
+    Save,
+    Print,
+    Undo,
+    Redo,
+    Table,
+    Command,
+    Ruler,
+    Move,
+    Copy,
+    Rotate,
+    ZoomIn,
+    Hand,
+    Lock,
+    Unlock,
+    Freeze,
+    Trash,
+    Help,
+    Warning,
+    Info,
+}
+
+impl ArayuzIkonu {
+    /// Tüm ikonlar; eşleme testi bunları gezer.
+    pub const ALL: [ArayuzIkonu; 43] = [
+        Self::Grid,
+        Self::Snap,
+        Self::Ortho,
+        Self::Polar,
+        Self::Isodraft,
+        Self::Track,
+        Self::Osnap,
+        Self::Lineweight,
+        Self::Transparency,
+        Self::DynInput,
+        Self::QuickProps,
+        Self::Annotation,
+        Self::Workspace,
+        Self::Settings,
+        Self::Search,
+        Self::Layers,
+        Self::PanelLeft,
+        Self::Close,
+        Self::Check,
+        Self::ChevronDown,
+        Self::Plus,
+        Self::Minus,
+        Self::File,
+        Self::FolderOpen,
+        Self::Save,
+        Self::Print,
+        Self::Undo,
+        Self::Redo,
+        Self::Table,
+        Self::Command,
+        Self::Ruler,
+        Self::Move,
+        Self::Copy,
+        Self::Rotate,
+        Self::ZoomIn,
+        Self::Hand,
+        Self::Lock,
+        Self::Unlock,
+        Self::Freeze,
+        Self::Trash,
+        Self::Help,
+        Self::Warning,
+        Self::Info,
+    ];
+
+    /// Lucide adı.
+    pub const fn ad(self) -> &'static str {
+        match self {
+            Self::Grid => "grid-3x3",
+            Self::Snap => "magnet",
+            Self::Ortho => "square",
+            Self::Polar => "compass",
+            Self::Isodraft => "box",
+            Self::Track => "crosshair",
+            Self::Osnap => "circle-dot",
+            Self::Lineweight => "weight",
+            Self::Transparency => "blend",
+            Self::DynInput => "text-cursor-input",
+            Self::QuickProps => "sliders-horizontal",
+            Self::Annotation => "eye",
+            Self::Workspace => "layout-dashboard",
+            Self::Settings => "settings",
+            Self::Search => "search",
+            Self::Layers => "layers",
+            Self::PanelLeft => "panel-left",
+            Self::Close => "x",
+            Self::Check => "check",
+            Self::ChevronDown => "chevron-down",
+            Self::Plus => "plus",
+            Self::Minus => "minus",
+            Self::File => "file",
+            Self::FolderOpen => "folder-open",
+            Self::Save => "save",
+            Self::Print => "printer",
+            Self::Undo => "undo-2",
+            Self::Redo => "redo-2",
+            Self::Table => "table",
+            Self::Command => "command",
+            Self::Ruler => "ruler",
+            Self::Move => "move",
+            Self::Copy => "copy",
+            Self::Rotate => "rotate-cw",
+            Self::ZoomIn => "zoom-in",
+            Self::Hand => "hand",
+            Self::Lock => "lock",
+            Self::Unlock => "lock-open",
+            Self::Freeze => "snowflake",
+            Self::Trash => "trash-2",
+            Self::Help => "circle-question-mark",
+            Self::Warning => "triangle-alert",
+            Self::Info => "info",
+        }
+    }
+
+    /// Glyph; Lucide adı kurulu sette yoksa \`None\`.
+    pub fn glyph(self) -> Option<char> {
+        harita().get(&self).copied()
+    }
+}
+
+/// Lucide codepoint haritası; ilk çözümlemede bir kez kurulur.
+fn harita() -> &'static HashMap<ArayuzIkonu, char> {
+    static HARITA: OnceLock<HashMap<ArayuzIkonu, char>> = OnceLock::new();
+    HARITA.get_or_init(|| {
+        use iconflow::{Pack, Size, Style, try_icon};
+        let mut harita = HashMap::new();
+        for ikon in ArayuzIkonu::ALL {
+            if let Ok(ikon_ref) = try_icon(Pack::Lucide, ikon.ad(), Style::Regular, Size::Regular)
+                && let Some(glyph) = char::from_u32(ikon_ref.codepoint)
+            {
+                harita.insert(ikon, glyph);
+            }
+        }
+        harita
+    })
+}
+
+/// iconflow fontlarını egui font tanımlarına ekler; Latin fontlardan sonra geri düşüş olarak.
+pub fn fontlari_ekle(fonts: &mut FontDefinitions) {
+    for font in iconflow::fonts() {
+        let ad = font.family.to_string();
+        fonts.font_data.insert(ad.clone(), std::sync::Arc::new(FontData::from_static(font.bytes)));
+        for family in [FontFamily::Proportional, FontFamily::Monospace] {
+            if let Some(liste) = fonts.families.get_mut(&family) {
+                liste.push(ad.clone());
+            }
+        }
+    }
+}
+
+/// Glyph'i tek satır metin olarak çizer; \`Painter\` tabanlı yüzeyler için.
+pub fn ciz(painter: &Painter, merkez: Pos2, ikon: ArayuzIkonu, boyut: f32, renk: Color32) {
+    if let Some(glyph) = ikon.glyph() {
+        painter.text(merkez, egui::Align2::CENTER_CENTER, glyph.to_string(), FontId::new(boyut, FontFamily::Proportional), renk);
+    }
+}
+
+#[cfg(test)]
+mod testler {
+    use super::ArayuzIkonu;
+
+    #[test]
+    fn her_arayuz_ikonu_lucide_de_bulunuyor() {
+        for ikon in ArayuzIkonu::ALL {
+            assert!(ikon.glyph().is_some(), "{ikon:?} ({}) Lucide'de yok", ikon.ad());
+        }
+    }
+
+    #[test]
+    fn adlar_tekil() {
+        let mut adlar: Vec<&str> = ArayuzIkonu::ALL.iter().map(|i| i.ad()).collect();
+        adlar.sort_unstable();
+        adlar.dedup();
+        assert_eq!(adlar.len(), ArayuzIkonu::ALL.len());
+    }
+}

@@ -6,6 +6,8 @@
 //! Every edit runs an engine command (`parameters {name, expr}` / `{delete}`); this module only
 //! draws and collects input.
 
+#![allow(clippy::disallowed_methods)]
+
 use egui::{Color32, Pos2, Rect, Sense, Shape, Stroke, pos2, vec2};
 use serde::Deserialize;
 use serde_json::{Value, json};

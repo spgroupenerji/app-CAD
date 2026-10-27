@@ -1,0 +1,84 @@
+<section class="ribbon">
+    <div class="rtabs">
+      <button class="rtab active">Home</button><button class="rtab">Insert</button><button class="rtab">Annotate</button>
+      <button class="rtab">Parametric</button><button class="rtab">View</button><button class="rtab">Manage</button><button class="rtab">Output</button>
+      <span class="spacer"></span>
+      <span class="tiny">Workspace · Drafting &amp; Annotation</span>
+    </div>
+    <div class="rbody">
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn on"><svg class="ic lg"><use href="#i-line"/></svg><span>Line</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-pline"/></svg><span>Polyline</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-circle"/></svg><span>Circle</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-arc"/></svg><span>Arc</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-rect"/></svg>Rectangle</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-hatch"/></svg>Hatch</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-text"/></svg>Text</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-dim"/></svg>Dimension</button>
+          </div>
+        </div>
+        <div class="rgroup-label">Draw</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-move"/></svg><span>Move</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-copy"/></svg><span>Copy</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-rotate"/></svg><span>Rotate</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-trim"/></svg><span>Trim</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-mirror"/></svg>Mirror</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-offset"/></svg>Offset</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-trim"/></svg>Fillet</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-minus"/></svg>Erase</button>
+          </div>
+        </div>
+        <div class="rgroup-label">Modify</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-text"/></svg><span>MText</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-dim"/></svg><span>Dimension</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-measure"/></svg>MLeader</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-text"/></svg>Table</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-dim"/></svg>Style</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-hatch"/></svg>Revision</button>
+          </div>
+        </div>
+        <div class="rgroup-label">Annotation</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-layers"/></svg><span>Layer Props</span></button>
+          <div class="rstack">
+            <button class="rsmall"><svg class="ic"><use href="#i-layers"/></svg>Make Current</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-freeze"/></svg>Freeze</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-lock"/></svg>Lock</button>
+            <button class="rsmall"><svg class="ic"><use href="#i-eye"/></svg>Off</button>
+          </div>
+        </div>
+        <div class="rgroup-label">Layers</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-block"/></svg><span>Create</span></button>
+          <button class="rbtn"><svg class="ic lg"><use href="#i-insert"/></svg><span>Insert</span></button>
+        </div>
+        <div class="rgroup-label">Block</div>
+      </div>
+      <div class="rsep"></div>
+      <div class="rgroup">
+        <div class="row">
+          <button class="rbtn"><svg class="ic lg"><use href="#i-props"/></svg><span>Properties</span></button>
+          <div class="rctl"><div class="select" style="width:104px">ByLayer</div></div>
+        </div>
+        <div class="rgroup-label">Properties</div>
+      </div>
+    </div>
+  </section>

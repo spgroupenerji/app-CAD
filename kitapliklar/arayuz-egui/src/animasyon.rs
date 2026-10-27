@@ -52,11 +52,12 @@ impl AnimationPref {
     }
 }
 
-/// Turn egui's own animations on or off, in the styles of both themes.
+/// Turn egui's own animations on or off, in the styles of both themes. On, the durations come
+/// from the design tokens ([`crate::tema::HAREKET_ORTA`]); off, everything ends at once.
 pub fn apply(ctx: &egui::Context, animate: bool) {
     let animated = egui::Style::default();
     ctx.all_styles_mut(|s| {
-        s.animation_time = if animate { animated.animation_time } else { 0.0 };
+        s.animation_time = if animate { crate::tema::HAREKET_ORTA } else { 0.0 };
         s.scroll_animation = if animate { animated.scroll_animation } else { egui::style::ScrollAnimation::none() };
     });
 }
@@ -175,7 +176,7 @@ mod testler {
         apply(&ctx, true);
         for theme in [egui::Theme::Dark, egui::Theme::Light] {
             let s = ctx.style_of(theme);
-            assert_eq!(s.animation_time, animated.animation_time, "{theme:?}");
+            assert_eq!(s.animation_time, crate::tema::HAREKET_ORTA, "{theme:?}");
             assert_eq!(s.scroll_animation, animated.scroll_animation, "{theme:?}");
         }
     }

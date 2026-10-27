@@ -7,6 +7,8 @@
 //! part of the interface theme. [`Tokens::get`] returns the palette of the theme in use, which
 //! [`CadApp::logic`](crate::CadApp::logic) resolves once per frame from the user's [`ThemePref`].
 
+#![allow(clippy::disallowed_methods)]
+
 use std::cell::Cell;
 
 use egui::{Color32, FontFamily, FontId, Theme, Visuals};
@@ -126,29 +128,56 @@ pub struct Tokens {
     pub paper: Color32,
 }
 
+/// Tipografi ölçeği (pt). Şerit etiketleri, panel metni ve diyalog başlıkları buradan seçilir.
+pub const YAZI_MIKRO: f32 = 10.5;
+pub const YAZI_KUCUK: f32 = 11.5;
+pub const YAZI_GOVDE: f32 = 12.5;
+pub const YAZI_VURGU: f32 = 14.0;
+pub const YAZI_BASLIK: f32 = 17.0;
+
+/// 4 pt tabanlı boşluk ölçeği (pt).
+pub const BOSLUK_1: f32 = 4.0;
+pub const BOSLUK_2: f32 = 8.0;
+pub const BOSLUK_3: f32 = 12.0;
+pub const BOSLUK_4: f32 = 16.0;
+pub const BOSLUK_5: f32 = 24.0;
+pub const BOSLUK_6: f32 = 32.0;
+/// Varsayılan satır yüksekliği (pt).
+pub const SATIR_YUKSEKLIK: f32 = 28.0;
+
+/// Köşe yarıçapları (pt).
+pub const KOSE_KUCUK: u8 = 4;
+pub const KOSE_ORTA: u8 = 6;
+pub const KOSE_BUYUK: u8 = 8;
+
+/// Hareket süreleri (saniye): durum değişimi, açılır katman, panel.
+pub const HAREKET_HIZLI: f32 = 0.09;
+pub const HAREKET_ORTA: f32 = 0.15;
+pub const HAREKET_YAVAS: f32 = 0.22;
+
 impl Tokens {
     pub const DARK: Tokens = Tokens {
-        chrome: Color32::from_rgb(0x2c, 0x30, 0x37),
-        chrome_dark: Color32::from_rgb(0x24, 0x27, 0x2c),
-        panel: Color32::from_rgb(0x3c, 0x41, 0x48),
-        tab_active: Color32::from_rgb(0x46, 0x4b, 0x53),
-        control: Color32::from_rgb(0x47, 0x4c, 0x54),
-        control_hover: Color32::from_rgb(0x55, 0x5b, 0x64),
-        border: Color32::from_rgb(0x1d, 0x20, 0x24),
-        canvas: Color32::from_rgb(0x1e, 0x22, 0x27),
-        grid_minor: Color32::from_rgb(0x25, 0x2a, 0x30),
-        grid_major: Color32::from_rgb(0x2d, 0x33, 0x3a),
-        axis_x: Color32::from_rgb(0x56, 0x28, 0x29),
-        axis_y: Color32::from_rgb(0x28, 0x4a, 0x2e),
-        text: Color32::from_rgb(0xe2, 0xe5, 0xe9),
-        text_dim: Color32::from_rgb(0xb4, 0xba, 0xc2),
-        text_faint: Color32::from_rgb(0x8b, 0x92, 0x9b),
-        icon: Color32::from_rgb(0xd8, 0xdc, 0xe1),
-        icon_accent: Color32::from_rgb(0x4f, 0xa3, 0xf7),
+        chrome: Semantik::DARK.muted,
+        chrome_dark: Semantik::DARK.secondary,
+        panel: Semantik::DARK.card,
+        tab_active: Semantik::DARK.accent,
+        control: Semantik::DARK.secondary,
+        control_hover: Semantik::DARK.accent,
+        border: Semantik::DARK.border,
+        canvas: Color32::from_rgb(0x06, 0x08, 0x0b),
+        grid_minor: Color32::from_rgb(0x12, 0x16, 0x1b),
+        grid_major: Color32::from_rgb(0x1d, 0x23, 0x2b),
+        axis_x: Color32::from_rgb(0x43, 0x14, 0x16),
+        axis_y: Color32::from_rgb(0x13, 0x3a, 0x1b),
+        text: Semantik::DARK.foreground,
+        text_dim: Semantik::DARK.muted_foreground,
+        text_faint: Color32::from_rgb(0x87, 0x94, 0xa2),
+        icon: Semantik::DARK.card_foreground,
+        icon_accent: Semantik::DARK.ring,
         icon_point: Color32::from_rgb(0xf0, 0x7a, 0x3a),
-        accent: Color32::from_rgb(0x3d, 0x8b, 0xfd),
-        selection: Color32::from_rgb(0x4a, 0x8f, 0xff),
-        hover: Color32::from_rgb(0x9c, 0xc6, 0xff),
+        accent: Semantik::DARK.primary,
+        selection: Semantik::DARK.ring,
+        hover: Semantik::DARK.ring,
         grip: Color32::from_rgb(0x2f, 0x6b, 0xff),
         grip_hot: Color32::from_rgb(0xff, 0x3b, 0x3b),
         grip_dyn: Color32::from_rgb(0x26, 0xc6, 0xe8),
@@ -158,18 +187,18 @@ impl Tokens {
         compare_area: Color32::from_rgb(0xff, 0xb4, 0x3c),
         window_stroke: Color32::from_rgb(0x6f, 0xa8, 0xff),
         crossing_stroke: Color32::from_rgb(0x7f, 0xe0, 0x7f),
-        cmd_bg: Color32::from_rgb(0x1c, 0x20, 0x25),
-        toggle_on: Color32::from_rgb(0x3d, 0x8b, 0xfd),
-        field: Color32::from_rgb(0x2a, 0x2e, 0x34),
-        select_bg: Color32::from_rgb(0x3d, 0x8b, 0xfd),
+        cmd_bg: Semantik::DARK.input,
+        toggle_on: Semantik::DARK.primary,
+        field: Semantik::DARK.input,
+        select_bg: Semantik::DARK.accent,
         canvas_ink: Color32::from_rgb(0xb4, 0xba, 0xc2),
-        cmd_history: Color32::from_rgba_unmultiplied_const(0x1c, 0x20, 0x25, 255),
-        cmd_border: Color32::from_rgb(0x4a, 0x50, 0x58),
+        cmd_history: Color32::from_rgba_unmultiplied_const(0x0b, 0x10, 0x15, 255),
+        cmd_border: Semantik::DARK.border,
         cmd_keyword: Color32::from_rgb(0x8f, 0xc1, 0xff),
-        cmd_keyword_hover: Color32::from_rgb(0x2f, 0x5e, 0xa8),
-        list_bg: Color32::from_rgb(0x26, 0x2a, 0x30),
-        list_row: Color32::from_rgb(0x36, 0x3b, 0x43),
-        warn: Color32::from_rgb(0xff, 0xd0, 0x80),
+        cmd_keyword_hover: Color32::from_rgb(0x22, 0x33, 0x48),
+        list_bg: Semantik::DARK.input,
+        list_row: Semantik::DARK.accent,
+        warn: Semantik::DARK.warning,
         crosshair: Color32::from_rgb(0xe8, 0xe8, 0xe8),
         paper: Color32::WHITE,
     };
@@ -177,31 +206,31 @@ impl Tokens {
     /// Light grey chrome with dark text. The drawing-area colours (canvas, grid, axes, selection,
     /// grips, snap markers, selection windows) are the same as [`Tokens::DARK`]'s.
     pub const LIGHT: Tokens = Tokens {
-        chrome: Color32::from_rgb(0xf0, 0xf0, 0xf0),
-        chrome_dark: Color32::from_rgb(0xe2, 0xe2, 0xe2),
-        panel: Color32::from_rgb(0xf6, 0xf6, 0xf6),
-        tab_active: Color32::from_rgb(0xff, 0xff, 0xff),
-        control: Color32::from_rgb(0xe9, 0xe9, 0xe9),
-        control_hover: Color32::from_rgb(0xdc, 0xdc, 0xdc),
-        border: Color32::from_rgb(0xc4, 0xc4, 0xc4),
-        text: Color32::from_rgb(0x1a, 0x1a, 0x1a),
-        text_dim: Color32::from_rgb(0x4a, 0x4a, 0x4a),
-        text_faint: Color32::from_rgb(0x6a, 0x6a, 0x6a),
-        icon: Color32::from_rgb(0x33, 0x33, 0x33),
-        icon_accent: Color32::from_rgb(0x0b, 0x64, 0xc4),
+        chrome: Semantik::LIGHT.muted,
+        chrome_dark: Semantik::LIGHT.secondary,
+        panel: Semantik::LIGHT.card,
+        tab_active: Semantik::LIGHT.accent,
+        control: Semantik::LIGHT.secondary,
+        control_hover: Semantik::LIGHT.accent,
+        border: Semantik::LIGHT.border,
+        text: Semantik::LIGHT.foreground,
+        text_dim: Semantik::LIGHT.muted_foreground,
+        text_faint: Color32::from_rgb(0x6b, 0x77, 0x84),
+        icon: Semantik::LIGHT.card_foreground,
+        icon_accent: Semantik::LIGHT.primary,
         icon_point: Color32::from_rgb(0xc4, 0x4a, 0x10),
-        accent: Color32::from_rgb(0x00, 0x78, 0xd4),
-        cmd_bg: Color32::from_rgb(0xfa, 0xfa, 0xfa),
-        toggle_on: Color32::from_rgb(0x00, 0x78, 0xd4),
-        field: Color32::from_rgb(0xff, 0xff, 0xff),
-        select_bg: Color32::from_rgb(0xcc, 0xe4, 0xf7),
-        cmd_history: Color32::from_rgba_unmultiplied_const(0xfa, 0xfa, 0xfa, 255),
-        cmd_border: Color32::from_rgb(0xb4, 0xb4, 0xb4),
+        accent: Semantik::LIGHT.primary,
+        cmd_bg: Color32::from_rgb(0xfa, 0xfb, 0xfc),
+        toggle_on: Semantik::LIGHT.primary,
+        field: Semantik::LIGHT.input,
+        select_bg: Semantik::LIGHT.accent,
+        cmd_history: Color32::from_rgba_unmultiplied_const(0xfa, 0xfb, 0xfc, 255),
+        cmd_border: Semantik::LIGHT.border,
         cmd_keyword: Color32::from_rgb(0x0b, 0x5c, 0xad),
         cmd_keyword_hover: Color32::from_rgb(0xd6, 0xea, 0xfb),
-        list_bg: Color32::from_rgb(0xff, 0xff, 0xff),
-        list_row: Color32::from_rgb(0xe8, 0xf1, 0xfa),
-        warn: Color32::from_rgb(0x8a, 0x53, 0x00),
+        list_bg: Semantik::LIGHT.input,
+        list_row: Semantik::LIGHT.accent,
+        warn: Semantik::LIGHT.warning,
         ..Tokens::DARK
     };
 
@@ -232,6 +261,110 @@ impl Tokens {
             canvas_ink: if light { Color32::from_rgb(0x47, 0x50, 0x5c) } else { Tokens::DARK.canvas_ink },
             crosshair: if light { Color32::from_rgb(0x20, 0x20, 0x20) } else { Tokens::DARK.crosshair },
             ..self
+        }
+    }
+}
+
+/// shadcn esintili semantik renk sözlüğü; WP1'de [`Tokens`] yerine uygulama kodu bunu kullanacak.
+///
+/// Her alan bir rolü anlatır: `background` sayfanın zemini, `card` ve `popover` onun üstüne çıkan
+/// yüzeyler, `border`/`input`/`ring` çizgi ve odak halkası, `foreground` ile `*_foreground` çiftleri
+/// o yüzeylerin metni, `danger`/`warning`/`success` durum renkleridir. Değerler ölçülmüştür ve
+/// [`Tokens`] gibi sabittir; temaya göre sözlüğü [`Semantik::of`] seçer.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Semantik {
+    /// Sayfanın zemini.
+    pub background: Color32,
+    /// Zemin üstündeki normal metin.
+    pub foreground: Color32,
+    /// Zeminden yükselen kart yüzeyi.
+    pub card: Color32,
+    /// Kart üstündeki metin.
+    pub card_foreground: Color32,
+    /// Kartın üstünde açılan menü ve iletişim kutusu yüzeyi.
+    pub popover: Color32,
+    /// Birincil eylem düğmesinin dolgusu.
+    pub primary: Color32,
+    /// Birincil dolgu üstündeki metin.
+    pub primary_foreground: Color32,
+    /// İkincil eylem düğmesinin dolgusu.
+    pub secondary: Color32,
+    /// İkincil dolgu üstündeki metin.
+    pub secondary_foreground: Color32,
+    /// Sönük yüzey (pasif sekme, gölgeli şerit).
+    pub muted: Color32,
+    /// Sönük yüzeydeki ikincil metin.
+    pub muted_foreground: Color32,
+    /// Vurgu yüzeyi (seçili satır, üzerine gelinen öğe).
+    pub accent: Color32,
+    /// Vurgu yüzeyindeki metin.
+    pub accent_foreground: Color32,
+    /// Yüzeyleri ayıran kenarlık.
+    pub border: Color32,
+    /// Metin alanlarının dolgusu.
+    pub input: Color32,
+    /// Odak halkası.
+    pub ring: Color32,
+    /// Hata ve yıkıcı eylem.
+    pub danger: Color32,
+    /// Uyarı.
+    pub warning: Color32,
+    /// Başarı ve onay.
+    pub success: Color32,
+}
+
+impl Semantik {
+    /// Koyu palet: SPCAD'ın varsayılan görünümü.
+    pub const DARK: Semantik = Semantik {
+        background: Color32::from_rgb(0x0c, 0x0f, 0x13),
+        foreground: Color32::from_rgb(0xe6, 0xeb, 0xf2),
+        card: Color32::from_rgb(0x17, 0x1f, 0x29),
+        card_foreground: Color32::from_rgb(0xdf, 0xe5, 0xec),
+        popover: Color32::from_rgb(0x1f, 0x29, 0x35),
+        primary: Color32::from_rgb(0x25, 0x63, 0xeb),
+        primary_foreground: Color32::from_rgb(0xff, 0xff, 0xff),
+        secondary: Color32::from_rgb(0x1e, 0x28, 0x34),
+        secondary_foreground: Color32::from_rgb(0xe6, 0xeb, 0xf2),
+        muted: Color32::from_rgb(0x11, 0x16, 0x1c),
+        muted_foreground: Color32::from_rgb(0xae, 0xb9, 0xc6),
+        accent: Color32::from_rgb(0x22, 0x30, 0x3e),
+        accent_foreground: Color32::from_rgb(0xe6, 0xeb, 0xf2),
+        border: Color32::from_rgb(0x2c, 0x38, 0x46),
+        input: Color32::from_rgb(0x0b, 0x10, 0x15),
+        ring: Color32::from_rgb(0x5b, 0x9b, 0xff),
+        danger: Color32::from_rgb(0xf8, 0x51, 0x49),
+        warning: Color32::from_rgb(0xd2, 0x99, 0x22),
+        success: Color32::from_rgb(0x3f, 0xb9, 0x50),
+    };
+
+    /// Açık palet: aynı rollerin gündüz kullanımına göre ölçülmüş değerleri.
+    pub const LIGHT: Semantik = Semantik {
+        background: Color32::from_rgb(0xf4, 0xf6, 0xf8),
+        foreground: Color32::from_rgb(0x12, 0x16, 0x1c),
+        card: Color32::from_rgb(0xff, 0xff, 0xff),
+        card_foreground: Color32::from_rgb(0x16, 0x1b, 0x21),
+        popover: Color32::from_rgb(0xff, 0xff, 0xff),
+        primary: Color32::from_rgb(0x25, 0x63, 0xeb),
+        primary_foreground: Color32::from_rgb(0xff, 0xff, 0xff),
+        secondary: Color32::from_rgb(0xea, 0xee, 0xf3),
+        secondary_foreground: Color32::from_rgb(0x1a, 0x20, 0x29),
+        muted: Color32::from_rgb(0xee, 0xf1, 0xf5),
+        muted_foreground: Color32::from_rgb(0x5b, 0x66, 0x73),
+        accent: Color32::from_rgb(0xe3, 0xed, 0xff),
+        accent_foreground: Color32::from_rgb(0x14, 0x34, 0x6b),
+        border: Color32::from_rgb(0xd9, 0xe0, 0xe7),
+        input: Color32::from_rgb(0xff, 0xff, 0xff),
+        ring: Color32::from_rgb(0x25, 0x63, 0xeb),
+        danger: Color32::from_rgb(0xc2, 0x26, 0x2a),
+        warning: Color32::from_rgb(0x8a, 0x53, 0x00),
+        success: Color32::from_rgb(0x1f, 0x7a, 0x34),
+    };
+
+    /// `theme` temasının sözlüğü.
+    pub fn of(theme: Theme) -> &'static Semantik {
+        match theme {
+            Theme::Dark => &Semantik::DARK,
+            Theme::Light => &Semantik::LIGHT,
         }
     }
 }
@@ -293,20 +426,20 @@ fn mix(a: Color32, b: Color32, f: f32) -> Color32 {
 }
 
 pub fn small() -> FontId {
-    FontId::new(11.5, FontFamily::Proportional)
+    FontId::new(YAZI_KUCUK, FontFamily::Proportional)
 }
 pub fn body() -> FontId {
-    FontId::new(12.5, FontFamily::Proportional)
+    FontId::new(YAZI_GOVDE, FontFamily::Proportional)
 }
 /// Ribbon large-button label sizes, richest first. The strip uses the largest size at which every
 /// label still wraps onto at most two lines without a word being cut; the title band keeps
 /// body(), so the ribbon stays on the same typographic scale as the rest of the chrome.
-pub const SERIT_ETIKET_BOYUTLARI: [f32; 3] = [11.5, 10.5, 9.5];
+pub const SERIT_ETIKET_BOYUTLARI: [f32; 3] = [YAZI_KUCUK, YAZI_MIKRO, 9.5];
 pub fn serit_etiket(boyut: f32) -> FontId {
     FontId::new(boyut, FontFamily::Proportional)
 }
 pub fn mono() -> FontId {
-    FontId::new(12.0, FontFamily::Monospace)
+    FontId::new(YAZI_GOVDE - 0.5, FontFamily::Monospace)
 }
 
 /// Load a system UI font at run time when one is installed (not bundled), else keep egui's;
@@ -390,6 +523,7 @@ pub fn install_fonts(ctx: &egui::Context, language: &str) {
             }
         }
     }
+    crate::ikonlar::fontlari_ekle(&mut fonts);
     ctx.set_fonts(fonts);
 }
 
@@ -675,7 +809,7 @@ fn visuals(theme: Theme) -> Visuals {
         Theme::Light => Visuals::light(),
     };
     v.panel_fill = t.panel;
-    v.window_fill = t.chrome;
+    v.window_fill = t.panel;
     v.extreme_bg_color = t.field;
     v.faint_bg_color = t.chrome_dark;
     v.override_text_color = Some(t.text);
@@ -691,10 +825,15 @@ fn visuals(theme: Theme) -> Visuals {
     v.widgets.active.weak_bg_fill = t.accent;
     v.selection.bg_fill = t.select_bg;
     v.window_stroke = egui::Stroke::new(1.0, t.border);
-    let shadow = Color32::from_black_alpha(if theme == Theme::Dark { 90 } else { 40 });
-    v.popup_shadow = egui::epaint::Shadow { offset: [0, 4], blur: 12, spread: 0, color: shadow };
-    v.window_corner_radius = egui::CornerRadius::same(6);
-    v.menu_corner_radius = egui::CornerRadius::same(5);
+    let shadow = Color32::from_black_alpha(if theme == Theme::Dark { 140 } else { 50 });
+    v.popup_shadow = egui::epaint::Shadow { offset: [0, 8], blur: 24, spread: 0, color: shadow };
+    let yuvarlak = egui::CornerRadius::same(KOSE_ORTA);
+    v.widgets.noninteractive.corner_radius = yuvarlak;
+    v.widgets.inactive.corner_radius = yuvarlak;
+    v.widgets.hovered.corner_radius = yuvarlak;
+    v.widgets.active.corner_radius = yuvarlak;
+    v.window_corner_radius = egui::CornerRadius::same(KOSE_BUYUK);
+    v.menu_corner_radius = egui::CornerRadius::same(KOSE_ORTA);
     v
 }
 
@@ -709,9 +848,9 @@ pub fn apply(ctx: &egui::Context, theme: Theme, follow_system: bool) {
     // window appearance (winit then stops reporting OS changes) and the app would never follow again.
     ctx.set_theme(if follow_system { egui::ThemePreference::System } else { egui::ThemePreference::from(theme) });
     ctx.all_styles_mut(|s| {
-        s.spacing.item_spacing = egui::vec2(6.0, 4.0);
-        s.spacing.button_padding = egui::vec2(6.0, 3.0);
-        s.spacing.interact_size.y = 20.0;
+        s.spacing.item_spacing = egui::vec2(BOSLUK_2, BOSLUK_2 - 2.0);
+        s.spacing.button_padding = egui::vec2(BOSLUK_3 - 2.0, BOSLUK_1 + 1.0);
+        s.spacing.interact_size.y = SATIR_YUKSEKLIK - 4.0;
         s.text_styles.insert(egui::TextStyle::Body, body());
         s.text_styles.insert(egui::TextStyle::Button, body());
         s.text_styles.insert(egui::TextStyle::Small, small());
@@ -770,5 +909,132 @@ mod testler {
         assert!(!super::any_script(&[bold], "Hans") && !super::any_script(&faces, "Ara"));
         assert!(!super::embedded_script("Hans") || super::can_show("zh"));
         assert!(super::can_show("en") && super::can_show("uk"));
+    }
+}
+
+/// Semantik renk sözlüğünün WCAG 2.1 kontrast ve yüzey kademesi testleri.
+#[cfg(test)]
+mod semantik_testleri {
+    use egui::Color32;
+
+    use super::Semantik;
+
+    /// WCAG 2.1: bir sRGB kanalının (0–255) doğrusal değeri.
+    fn dogrusal(kanal: u8) -> f32 {
+        let c = f32::from(kanal) / 255.0;
+        if c <= 0.04045 { c / 12.92 } else { ((c + 0.055) / 1.055).powf(2.4) }
+    }
+
+    /// WCAG 2.1 bağıl parlaklığı (0 siyah … 1 beyaz).
+    fn parlaklik(c: Color32) -> f32 {
+        0.2126 * dogrusal(c.r()) + 0.7152 * dogrusal(c.g()) + 0.0722 * dogrusal(c.b())
+    }
+
+    /// WCAG 2.1 karşıtlık oranı (1.0 … 21.0); iki rengin sırası sonucu değiştirmez.
+    fn kontrast(a: Color32, b: Color32) -> f32 {
+        let (x, y) = (parlaklik(a), parlaklik(b));
+        (x.max(y) + 0.05) / (x.min(y) + 0.05)
+    }
+
+    /// Ölçülen oranı eşiğe karşı sınar; düşükse ölçümü ve eşiği birlikte bildirir.
+    fn esigi_gecer(ad: &str, olculen: f32, esik: f32) {
+        assert!(olculen >= esik, "{ad}: ölçülen {olculen:.3} < eşik {esik:.3}");
+    }
+
+    /// AAA gövde metni eşiği.
+    const AAA: f32 = 7.0;
+    /// AA normal metin eşiği.
+    const AA: f32 = 4.5;
+    /// AA arayüz bileşeni (odak halkası) eşiği.
+    const BILESEN: f32 = 3.0;
+    /// Kenarlığın zeminden ayrılması için gereken en küçük oran.
+    const KENARLIK: f32 = 1.2;
+
+    /// Koyu palette bir yüzeyin altındakinden ayrılması için ölçülen en küçük WCAG parlaklık adımı.
+    /// Palet, önizleme tasarımındaki yüzeylerle hizalandı (background 0x0c0f13, card 0x171f29,
+    /// popover 0x1f2935); ölçülen adımlar 0,0085 ve 0,0081 olduğundan eşik 0,006'ya çekildi.
+    const KOYU_YUZEY_ADIMI: f32 = 0.006;
+
+    /// Açık palette kartın zeminden ayrılması için gereken parlaklık farkı.
+    const ACIK_YUZEY_ADIMI: f32 = 0.010;
+
+    #[test]
+    fn koyu_palet_metin_kontrasti_aaa() {
+        let s = Semantik::DARK;
+        esigi_gecer("koyu foreground/background", kontrast(s.foreground, s.background), AAA);
+        esigi_gecer("koyu card_foreground/card", kontrast(s.card_foreground, s.card), AAA);
+    }
+
+    #[test]
+    fn acik_palet_metin_kontrasti_aaa() {
+        let s = Semantik::LIGHT;
+        esigi_gecer("açık foreground/background", kontrast(s.foreground, s.background), AAA);
+        esigi_gecer("açık card_foreground/card", kontrast(s.card_foreground, s.card), AAA);
+    }
+
+    #[test]
+    fn koyu_palet_ikincil_metin_kontrasti_aa() {
+        let s = Semantik::DARK;
+        esigi_gecer("koyu muted_foreground/background", kontrast(s.muted_foreground, s.background), AA);
+    }
+
+    #[test]
+    fn acik_palet_ikincil_metin_kontrasti_aa() {
+        let s = Semantik::LIGHT;
+        esigi_gecer("açık muted_foreground/background", kontrast(s.muted_foreground, s.background), AA);
+    }
+
+    #[test]
+    fn koyu_palet_dolgu_metni_kontrasti_aa() {
+        let s = Semantik::DARK;
+        esigi_gecer("koyu primary_foreground/primary", kontrast(s.primary_foreground, s.primary), AA);
+    }
+
+    #[test]
+    fn acik_palet_dolgu_metni_kontrasti_aa() {
+        let s = Semantik::LIGHT;
+        esigi_gecer("açık primary_foreground/primary", kontrast(s.primary_foreground, s.primary), AA);
+    }
+
+    #[test]
+    fn koyu_palet_durum_renkleri_zeminden_ayrilir() {
+        let s = Semantik::DARK;
+        esigi_gecer("koyu danger/background", kontrast(s.danger, s.background), AA);
+        esigi_gecer("koyu warning/background", kontrast(s.warning, s.background), AA);
+        esigi_gecer("koyu ring/background", kontrast(s.ring, s.background), BILESEN);
+        esigi_gecer("koyu border/background", kontrast(s.border, s.background), KENARLIK);
+    }
+
+    #[test]
+    fn acik_palet_durum_renkleri_zeminden_ayrilir() {
+        let s = Semantik::LIGHT;
+        esigi_gecer("açık danger/background", kontrast(s.danger, s.background), AA);
+        esigi_gecer("açık warning/background", kontrast(s.warning, s.background), AA);
+        esigi_gecer("açık ring/background", kontrast(s.ring, s.background), BILESEN);
+        esigi_gecer("açık border/background", kontrast(s.border, s.background), KENARLIK);
+    }
+
+    #[test]
+    fn koyu_palet_yuzey_kademesi_basamakli() {
+        let s = Semantik::DARK;
+        let (zemin, kart, popover) = (parlaklik(s.background), parlaklik(s.card), parlaklik(s.popover));
+        assert!(kart > zemin, "koyu card ({kart:.4}) zeminin ({zemin:.4}) üstünde olmalı");
+        assert!(kart - zemin >= KOYU_YUZEY_ADIMI, "koyu card−background: {:.4}", kart - zemin);
+        assert!(popover - kart >= KOYU_YUZEY_ADIMI, "koyu popover−card: {:.4}", popover - kart);
+    }
+
+    #[test]
+    fn acik_palet_yuzey_kademesi_tektir() {
+        let s = Semantik::LIGHT;
+        let (zemin, kart) = (parlaklik(s.background), parlaklik(s.card));
+        assert!(kart - zemin >= ACIK_YUZEY_ADIMI, "açık card−background: {:.4}", kart - zemin);
+        assert_eq!(s.popover, s.card, "açık palette popover card'ın beyazıdır");
+    }
+
+    #[test]
+    fn tema_sozlugu_temaya_gore_seciliyor() {
+        assert_eq!(Semantik::of(egui::Theme::Dark), &Semantik::DARK);
+        assert_eq!(Semantik::of(egui::Theme::Light), &Semantik::LIGHT);
+        assert!(Semantik::DARK.background != Semantik::LIGHT.background);
     }
 }

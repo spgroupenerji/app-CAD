@@ -24,6 +24,8 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 log = { workspace = true }
 image = { workspace = true }
+# Genel arayüz ikonları: Lucide seti (P1).
+iconflow = { version = "2.1", features = ["pack-lucide"] }
 
 [dev-dependencies]
 egui_kittest = { workspace = true, features = ["wgpu", "snapshot"] }

@@ -4,6 +4,8 @@
 //! visibility states or lookup values). Dragging runs the engine's dynamic grip edit
 //! ([`spcad_engine::Session::start_dyn_grip`]); a list choice runs `blocks.reference.set`.
 
+#![allow(clippy::disallowed_methods)]
+
 use std::sync::Arc;
 
 use egui::{Color32, Painter, Pos2, Rect, Shape, Stroke, vec2};

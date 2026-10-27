@@ -30,6 +30,8 @@
 //! [`CadApp::profile_json`] under [`PROFILE_KEY`] next to the interface prefs and restores it with
 //! [`CadApp::load_profile`].
 
+#![allow(clippy::disallowed_methods)]
+
 mod diyalog;
 
 pub use diyalog::dialog;

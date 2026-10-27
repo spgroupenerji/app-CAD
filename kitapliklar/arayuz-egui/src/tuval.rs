@@ -1,6 +1,8 @@
 //! The drawing area: grid, entities, selection highlighting, grips, rubber bands, object-snap
 //! markers, crosshair cursor, ViewCube, UCS icon and mouse handling.
 
+#![allow(clippy::disallowed_methods)]
+
 use egui::{Color32, Pos2, Rect, Sense, Shape, Stroke, pos2, vec2};
 use spcad_color::Rgb;
 use spcad_doc::Handle;

@@ -2,3 +2,8 @@ allow-unwrap-in-tests = true
 allow-expect-in-tests = true
 allow-panic-in-tests = true
 allow-indexing-slicing-in-tests = true
+
+# Tasarım sistemi governance: ham renkler yalnız tema.rs içinde tanımlanır. Mevcut
+# ihlaller (WP2/WP3'te tokenlara taşınacak) dosya başında allow(clippy::disallowed_methods)
+# taşır; yeni kod ham renk kullanamaz.
+disallowed-methods = ["egui::Color32::from_rgb", "egui::Color32::from_rgba_unmultiplied_const"]
