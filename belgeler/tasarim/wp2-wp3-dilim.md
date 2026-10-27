@@ -35,3 +35,8 @@
 - Şerit 84 px denemesi **geri alındı**: mevcut yerleşim 84 px'te etiketleri üst üste bindiriyor
   (Multiline Text / Layer Properties); kompakt şerit P3'te yerleşim algoritmasıyla birlikte yapılmalı.
 - Görüntü: [gercek-p3.png](gorseller/wp3/gercek-p3.png).
+## Komut çubuğu (P3 dilimi)
+
+- Giriş alanı artık `t.field` dolgusu + 1 px `cmd_border` + 4 px köşe ile çerçeveli.
+- Boşken "Command:" yanında "Type a command, or press Ctrl+K" ipucu (uk/tr çevirileri eklendi).
+- Görüntü: [gercek-p3b.png](gorseller/wp3/gercek-p3b.png).

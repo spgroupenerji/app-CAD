@@ -414,6 +414,8 @@ pub fn show(app: &mut CadApp, ui: &mut egui::Ui) {
         let p = ui.painter().clone();
         p.hline(r.x_range(), r.top(), Stroke::new(1.0, t.cmd_border));
         let bar = Rect::from_min_max(pos2(r.left() + 6.0, r.bottom() - BAR_H - 3.0), pos2(r.right() - 6.0, r.bottom() - 3.0));
+        p.rect_filled(bar, 4.0, t.field);
+        p.rect_stroke(bar, 4.0, Stroke::new(1.0, t.cmd_border), egui::StrokeKind::Inside);
         // The top edge resizes the inline history.
         let grip = Rect::from_min_max(pos2(r.left(), r.top()), pos2(r.right(), r.top() + 4.0));
         let resp = ui.interact(grip, ui.id().with("cmdline_grip"), Sense::drag());
@@ -511,6 +513,10 @@ pub fn show(app: &mut CadApp, ui: &mut egui::Ui) {
                 let gw = g.size().x;
                 p.galley(pos2(x, bar.center().y - g.size().y / 2.0), g, t.text_faint);
                 x += gw + 6.0;
+                if app.cmd.buffer.is_empty() {
+                    let g = p.layout_no_wrap(crate::tl!("Type a command, or press Ctrl+K").to_string(), font.clone(), t.text_faint);
+                    p.galley(pos2(x, bar.center().y - g.size().y / 2.0), g, t.text_faint);
+                }
             }
         }
         let g = p.layout_no_wrap(app.cmd.buffer.clone(), font, t.text);
