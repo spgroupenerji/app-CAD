@@ -57,3 +57,8 @@
 - Kalınlık formülü `genişlik/16 clamp(1,0–1,6)` → `genişlik/14 clamp(1,1–1,6)`:
   20 px ikonda ~**1,43 px**, 16 px'te ~1,14 px; shadcn/Lucide 1,5 px hedefine yaklaştı.
 - Katalog yenilendi: [ikon-katalogu.png](gorseller/wp4/ikon-katalogu.png).
+## Canlı alan denetimi (P4 kapanış kanıtı)
+
+- `tests/ikon_canli_alan.rs`: 141 ikon 24×24 hücrelere çizilir, mürekkep sınırları ölçülür.
+- Sonuç: **boş ikon 0**, en küçük canlı alan **14 px** (24 px hücrede); 14 px altı ikon yok.
+- Böylece kalan ikonlar için zorunlu yeniden çizim kalmadı; isteğe bağlı optik ince ayar listesi ayrı tutulur.
