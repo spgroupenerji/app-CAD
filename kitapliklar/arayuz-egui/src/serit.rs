@@ -476,8 +476,8 @@ pub const SEKMELER: &[Sekme] = &[
 
 /// Window rectangle of the tab strip and body.
 pub const SEKME_Y: f32 = 30.0;
-pub const GOVDE_Y: f32 = 94.0;
-const TUR_H: f32 = 18.0;
+pub const GOVDE_Y: f32 = 84.0;
+const TUR_H: f32 = 16.0;
 const SATIR_H: f32 = 21.0;
 const IC_BOSLUK: f32 = 6.0;
 /// A large button that shows its label under the icon; the width follows the longest word of

@@ -73,3 +73,9 @@
 - Genişletilmiş geçmiş `list_bg` dolgu + `cmd_border` çerçeve ile ayrıldı.
 - Satırlar 6 px iç boşluklu; hover `list_row`; en yeni satır `text`, eskiler `text_dim`.
 - Görüntü: [gercek-komutgecmisi.png](gorseller/wp4/gercek-komutgecmisi.png).
+## Kompakt şerit (P3 kapanış dilimi)
+
+- `GOVDE_Y` 94 → **84**, `TUR_H` 18 → **16**: toplam şerit 124 → **114 px**.
+- Etiketler 9,5–11,5 px ölçeğinde kaldı; 1600 px'te taşma/çakışma yok (görüntü doğrulandı).
+- Şerit testleri (11) yeşil; build başarılı.
+- Görüntü: [gercek-kompakt-serit.png](gorseller/wp4/gercek-kompakt-serit.png).
