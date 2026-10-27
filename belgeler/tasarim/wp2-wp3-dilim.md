@@ -68,3 +68,8 @@
 - Options içerik alanı `chrome_dark` dolgu ile pencere yüzeyinden ayrıldı (18/14 iç boşluk).
 - Aktif sekmenin üstünde 2 px `accent` çizgisi; pasif sekmelerde alt kenarlık korunuyor.
 - Görüntü: [gercek-diyalog2.png](gorseller/wp4/gercek-diyalog2.png).
+## Komut geçmişi paneli (P3 dilimi)
+
+- Genişletilmiş geçmiş `list_bg` dolgu + `cmd_border` çerçeve ile ayrıldı.
+- Satırlar 6 px iç boşluklu; hover `list_row`; en yeni satır `text`, eskiler `text_dim`.
+- Görüntü: [gercek-komutgecmisi.png](gorseller/wp4/gercek-komutgecmisi.png).

@@ -579,6 +579,8 @@ pub fn show(app: &mut CadApp, ui: &mut egui::Ui) {
 fn history_window(app: &CadApp, ui: &mut egui::Ui, r: Rect) {
     let t = Tokens::get();
     let inner = r.shrink2(vec2(4.0, 0.0));
+    ui.painter().rect_filled(inner, 4.0, t.list_bg);
+    ui.painter().rect_stroke(inner, 4.0, Stroke::new(1.0, t.cmd_border), egui::StrokeKind::Inside);
     let mut child = ui.new_child(egui::UiBuilder::new().max_rect(inner).layout(egui::Layout::top_down(egui::Align::Min)));
     child.spacing_mut().item_spacing.y = 0.0;
     let log = &app.session.log;
@@ -587,10 +589,17 @@ fn history_window(app: &CadApp, ui: &mut egui::Ui, r: Rect) {
         LINE_H,
         log.len(),
         |ui, rows| {
-            for l in log.get(rows).into_iter().flatten() {
+            let son = log.len().saturating_sub(1);
+            let imlec = ui.input(|i| i.pointer.hover_pos());
+            for (i, l) in log.get(rows.clone()).into_iter().flatten().enumerate() {
+                let sira = rows.start + i;
                 let (row, _) = ui.allocate_exact_size(vec2(ui.available_width(), LINE_H), Sense::hover());
                 let p = ui.painter().with_clip_rect(row.intersect(ui.clip_rect()));
-                p.text(pos2(row.left(), row.center().y), egui::Align2::LEFT_CENTER, l, crate::tema::mono(), t.text_dim);
+                if imlec.is_some_and(|m| row.contains(m)) {
+                    p.rect_filled(row.shrink2(vec2(2.0, 1.0)), 3.0, t.list_row);
+                }
+                let renk = if sira == son { t.text } else { t.text_dim };
+                p.text(pos2(row.left() + 6.0, row.center().y), egui::Align2::LEFT_CENTER, l, crate::tema::mono(), renk);
             }
         },
     );
