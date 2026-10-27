@@ -372,8 +372,10 @@ pub fn show(app: &mut crate::CadApp, ui: &mut egui::Ui) {
     app.ui.docking = workspace.clone();
     let mut style = DockStyle::from_ui(ui);
     style.min_pane = 96.0;
+    style.tab_height = 34.0;
+    style.gap = 1.0;
     style.background = t.panel;
-    style.tab_background = t.chrome;
+    style.tab_background = t.chrome_dark;
     style.active_background = t.tab_active;
     style.text = t.text;
     style.inactive_text = t.text_dim;

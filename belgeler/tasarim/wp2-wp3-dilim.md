@@ -28,3 +28,10 @@
 - **P3:** şerit 84 px kompakt gövde, komut güvertesi yeniden yazımı, durum çubuğu gruplama, ViewCube.
 - **P4:** 136 CAD ikonunun 24×24 / 1,5 px kuralıyla yeniden çizimi.
 - **P5:** dark/light × 15 dil × 3 genişlik golden testleri, a11y, ham renk allow listesinin kaldırılması.
+## Ek dilim — panel sekmeleri
+
+- `kenetleme::show`: `DockStyle.tab_height = 34`, `gap = 1`, `tab_background = chrome_dark` (secondary) —
+  Layers/Properties başlıkları artık panel yüzeyinden ayrışıyor.
+- Şerit 84 px denemesi **geri alındı**: mevcut yerleşim 84 px'te etiketleri üst üste bindiriyor
+  (Multiline Text / Layer Properties); kompakt şerit P3'te yerleşim algoritmasıyla birlikte yapılmalı.
+- Görüntü: [gercek-p3.png](gorseller/wp3/gercek-p3.png).
